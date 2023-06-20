@@ -20,6 +20,15 @@ app.get("/", (req,res)=>{
     res.json("This is the backend!")
 })
 
+app.get("/discography", (req,res)=>{
+    const q = "SELECT * FROM album"
+    db.query(q,(err, data)=>{
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+})
+
+
 app.listen(8800, ()=>{
     console.log("Connected to backend!")
 })
