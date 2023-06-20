@@ -20,15 +20,15 @@ const Album = () => {
         fetchAllAlbum()
     },[])
 
-    // const handleDelete = async (id) =>{
-    //     try{
-    //         await axios.delete("http://localhost:8800/album/"+id)
-    //         window. location.reload() // Refresh page
-    //     }
-    //     catch(err){
-    //         console.log(err)
-    //     }
-    // }
+    const handleDelete = async (albID) =>{
+        try{
+            await axios.delete("http://localhost:8800/discography/"+albID)
+            window.location.reload() // Refresh page
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
   
     return (
         <div>
@@ -37,9 +37,9 @@ const Album = () => {
                 {album.map((album)=>(
                     <div className="album" key={album.albID}>
                         <p>{album.albTitle}</p>
-                        {/* <img src={album.image} alt="Album" style={{ width: '200px' }} />
-                        <button className='delete' onClick={()=>handleDelete(album.id)}>Delete</button>          
-                        <button className='update'><Link to={`/update/${album.id}`}>Update</Link></button>                   */}
+                        {/* <img src={album.image} alt="Album" style={{ width: '200px' }} /> */}
+                        <button className='delete' onClick={()=>handleDelete(album.albID)}>Delete</button>          
+                        {/* <button className='update'><Link to={`/update/${album.id}`}>Update</Link></button>                   */}
                     </div>
                 ))}
             </div>

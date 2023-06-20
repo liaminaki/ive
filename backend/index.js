@@ -57,6 +57,16 @@ app.post("/discography", upload.single('albPhoto'), (req,res)=>{
     })
 })
 
+app.delete("/discography/:albID", (req,res)=>{
+    const albID = req.params.albID;
+    const q = "DELETE FROM album WHERE albID = ?"
+
+    db.query (q, [albID], (err, data)=>{
+        if(err) return res.json(err);
+        return res.json("Deleted.");
+    })
+})
+
 
 app.listen(8800, ()=>{
     console.log("Connected to backend!")
