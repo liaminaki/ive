@@ -1,6 +1,6 @@
 import express from "express"   // Build APIs
 import mysql from "mysql"       // Database
-import cors from "cors"         // Allow requests from other origins
+import cors from "cors"         // Allow app to use backend API
 import multer from "multer"     // Allow uploading files
 
 // Connect to Database
@@ -14,7 +14,7 @@ const db = mysql.createConnection({
 const app = express()
 
 app.use(express.json()) // Allow sending json file using a client
-app.use(cors())
+app.use(cors()) 
 
 app.get("/", (req,res)=>{  
     res.json("This is the backend!")
