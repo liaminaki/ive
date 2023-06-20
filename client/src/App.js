@@ -10,7 +10,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/discography" element={<Album/>}/>
-          <Route path="/add" element={<AddAlbum/>}/>
+          <Route path="/discography/add" element={<AddAlbum/>}/>
         </Routes>
       </BrowserRouter>
     </div>

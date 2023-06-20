@@ -11,10 +11,23 @@ const db = mysql.createConnection({
     database:"ive"
 })
 
+// Create a storage engine for Multer
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, './album_photo/'); // Destination directory for storing uploaded files
+    },
+    filename: (req, file, cb) => {
+      cb(null, Date.now() + '-' + file.originalname); // Generate a unique filename for each uploaded file
+    }
+});
+
+const upload = multer({ storage }); // Create a Multer instance with the configured storage engine
+
 const app = express()
 
 app.use(express.json()) // Allow sending json file using a client
 app.use(cors()) 
+app.use('/album_photo', express.static('album_photo'))
 
 app.get("/", (req,res)=>{  
     res.json("This is the backend!")
@@ -25,6 +38,24 @@ app.get("/discography", (req,res)=>{
     db.query(q,(err, data)=>{
         if(err) return res.json(err)
         return res.json(data)
+    })
+})
+
+app.post("/discography", upload.single('albPhoto'), (req,res)=>{
+    
+    const values = [req.body.albTitle,
+                    req.file.filename,
+                    req.body.albLanguage,
+                    req.body.albRelDate,
+                    req.body.albLength,
+                    req.body.albType,
+                    req.body.albNoOfSongs];
+    
+    const q = "INSERT INTO album (`albTitle`, `albPhoto`, `albLanguage`, `albRelDate`, `albLength`, `albType`, `albNoOfSongs`) VALUES (?)";
+    
+    db.query(q,[values],(err, data)=>{
+        if(err) return res.json(err);
+        return res.json("Album added.");
     })
 })
 
