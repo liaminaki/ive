@@ -10,9 +10,9 @@ const AddAlbum = () => {
         previewAlbPhoto: null,
         albLanguage: "",
         albRelDate: null,
-        albLength: null,
-        albType: "",
-        albNoOfSongs: null
+        // albLength: null,
+        albType: ""
+        // albNoOfSongs: null
       });
     
       const handleChange = (e) => {
@@ -42,9 +42,9 @@ const AddAlbum = () => {
         albumDataToAdd.append("albPhoto", albPhoto);
         albumDataToAdd.append("albLanguage", albLanguage);
         albumDataToAdd.append("albRelDate", albRelDate);
-        albumDataToAdd.append("albLength", albLength);
+        // albumDataToAdd.append("albLength", albLength);
         albumDataToAdd.append("albType", albType);
-        albumDataToAdd.append("albNoOfSongs", albNoOfSongs);
+        // albumDataToAdd.append("albNoOfSongs", albNoOfSongs);
     
         try {
           await axios.post("http://localhost:8800/discography", albumDataToAdd);
@@ -56,22 +56,28 @@ const AddAlbum = () => {
     
       return (
         <div>
-          <h1>Add new album</h1>
-          <form onSubmit={handleSubmit} action="/discography" encType="multipart/form-data" method="post">
-            <input type="text" placeholder="Album Title" onChange={handleChange} name="albTitle" />
-            <input type="file" onChange={handleChange} name="albPhoto" />
-            {albumData.previewAlbPhoto && (
-              <div>
-                <h2>Preview Album Photo:</h2>
-                <img src={albumData.previewAlbPhoto} alt="Preview" />
-              </div>
-            )}
-            <input type="text" placeholder="Album Language" onChange={handleChange} name="albLanguage" />
-            <input type="date" onChange={handleChange} name="albRelDate" />
-            <input type="time" onChange={handleChange} name="albLength" />
-            <input type="text" placeholder="Album Type" onChange={handleChange} name="albType" />
-            <input type="number" placeholder="Number of Songs" onChange={handleChange} name="albNoOfSongs" />
-            <button type="submit">Add</button>
+            <h1>Add new album</h1>
+            <form onSubmit={handleSubmit} action="/discography" encType="multipart/form-data" method="post">
+                <input type="text" placeholder="Album Title" onChange={handleChange} name="albTitle" />
+                <input type="file" onChange={handleChange} name="albPhoto" />
+                {albumData.previewAlbPhoto && (
+                <div>
+                    <h2>Preview Album Photo:</h2>
+                    <img src={albumData.previewAlbPhoto} alt="Preview" />
+                </div>
+                )}
+                <input type="text" placeholder="Album Language" onChange={handleChange} name="albLanguage" />
+                <input type="date" onChange={handleChange} name="albRelDate" />
+                {/* <input type="time" onChange={handleChange} name="albLength" /> */}
+                <select name="albType" onChange={handleChange}>
+                    <option value="">Select Album Type</option>
+                    <option value="single">Single Album</option>
+                    <option value="mini">Mini Album</option>
+                    <option value="studio">Studio Album</option>
+                    <option value="digitalSingle">Digital Single</option>
+                </select>
+                {/* <input type="number" placeholder="Number of Songs" onChange={handleChange} name="albNoOfSongs" /> */}
+                <button type="submit">Add</button>
           </form>
         </div>
       );

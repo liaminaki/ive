@@ -47,11 +47,9 @@ app.post("/discography", upload.single('albPhoto'), (req,res)=>{
                     req.file.filename,
                     req.body.albLanguage,
                     req.body.albRelDate,
-                    req.body.albLength,
-                    req.body.albType,
-                    req.body.albNoOfSongs];
+                    req.body.albType];
     
-    const q = "INSERT INTO album (`albTitle`, `albPhoto`, `albLanguage`, `albRelDate`, `albLength`, `albType`, `albNoOfSongs`) VALUES (?)";
+    const q = "INSERT INTO album (`albTitle`, `albPhoto`, `albLanguage`, `albRelDate`, `albType`) VALUES (?)";
     
     db.query(q,[values],(err, data)=>{
         if(err) return res.json(err);
