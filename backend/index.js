@@ -11,4 +11,12 @@ const db = mysql.createConnection({
     database:"ive"
 })
 
+const app = express()
+
+app.use(express.json()) // Allow sending json file using a client
+app.use(cors())
+
+app.listen(8800, ()=>{
+    console.log("Connected to backend!")
+})
 
