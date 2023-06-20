@@ -16,6 +16,10 @@ const app = express()
 app.use(express.json()) // Allow sending json file using a client
 app.use(cors())
 
+app.get("/", (req,res)=>{  
+    res.json("This is the backend!")
+})
+
 app.listen(8800, ()=>{
     console.log("Connected to backend!")
 })
