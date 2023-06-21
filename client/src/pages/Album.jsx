@@ -3,14 +3,14 @@ import axios from 'axios' // HTTP client use to communicate with backend
 import { useParams, Link } from 'react-router-dom'
 
 const Album = () => {
-    const { albTypeID } = useParams(); // Retrieve the album type from the URL parameters
+    const { albType } = useParams(); // Retrieve the album type from the URL parameters
     const [album, setAlbum] = useState([])
 
     // Run for every render
     useEffect(() => {
         const fetchAllAlbum = async () => {
             try{
-                const res = await axios.get(`http://localhost:8800/discography/${albTypeID}`)
+                const res = await axios.get(`http://localhost:8800/discography/${albType}`)
                 console.log(res)
                 setAlbum(res.data);
             } catch(err){
@@ -34,7 +34,7 @@ const Album = () => {
         <div>
             <h1>Albums</h1>
             <div className="album">
-                <h2>{albTypeID}</h2>
+                <h2>{albType}</h2>
                 {album.map((album)=>(
                     <div className="album" key={album.albID}>
                         <p>{album.albTitle}</p>

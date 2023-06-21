@@ -26,7 +26,7 @@ const Discography = () => {
         fetchAllAlbum();
     }, []);
    
-    const filterAlbumsByType = (aType) => album.filter((album) => album.albTypeID === aType);
+    const filterAlbumsByType = (aType) => album.filter((album) => album.albType === aType);
     const limitAlbums = (albums, limit) => albums.slice(0, limit);
   
     return (
