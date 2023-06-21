@@ -39,7 +39,7 @@ const Album = () => {
                         <p>{album.albTitle}</p>
                         {/* <img src={album.image} alt="Album" style={{ width: '200px' }} /> */}
                         <button className='delete' onClick={()=>handleDelete(album.albID)}>Delete</button>          
-                        {/* <button className='update'><Link to={`/update/${album.id}`}>Update</Link></button>                   */}
+                        <button className='update'><Link to={`/discography/update/${album.albID}`}>Update</Link></button>                  
                     </div>
                 ))}
             </div>
