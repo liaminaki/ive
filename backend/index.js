@@ -34,13 +34,13 @@ app.get("/", (req,res)=>{
     res.json("This is the backend!")
 })
 
-app.get("/discography", (req,res)=>{
-    const q = "SELECT * FROM album"
-    db.query(q,(err, data)=>{
-        if(err) return res.json(err)
-        return res.json(data)
-    })
-})
+app.get("/discography", (req, res) => {
+    const q = "SELECT * FROM album ORDER BY albRelDate DESC"; // Sort list from latest to oldest
+    db.query(q, (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    });
+});
 
 app.post("/discography", upload.single('albPhoto'), (req,res)=>{
     
@@ -57,6 +57,15 @@ app.post("/discography", upload.single('albPhoto'), (req,res)=>{
         return res.json("Album added.");
     })
 })
+
+app.get("/discography/:albType", (req, res) => {
+    const albType = req.params.albType;
+    const q = "SELECT * FROM album WHERE albType = ? ORDER BY albRelDate DESC";
+    db.query(q, [albType], (err, data) => {
+        if (err) return res.json(err);
+        return res.json(data);
+    });
+});
 
 app.delete("/discography/:albID", (req,res)=>{
     const albID = req.params.albID;
