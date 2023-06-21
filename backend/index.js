@@ -144,6 +144,14 @@ app.get("/discography/albumType/:albID", (req, res) => {
     });
   });
 
+app.get("/album-types", (req, res) => {
+    const q = "SELECT albType FROM albumTypes ORDER BY albType DESC";
+    db.query(q, (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    });
+});
+
 
 app.listen(8800, ()=>{
     console.log("Connected to backend!")
