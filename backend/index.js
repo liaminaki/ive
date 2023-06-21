@@ -2,6 +2,7 @@ import express from "express"   // Build APIs
 import mysql from "mysql"       // Database
 import cors from "cors"         // Allow app to use backend API
 import multer from "multer"     // Allow uploading files
+import fs from "fs"             // File system module
 
 // Connect to Database
 const db = mysql.createConnection({
@@ -59,12 +60,39 @@ app.post("/discography", upload.single('albPhoto'), (req,res)=>{
 
 app.delete("/discography/:albID", (req,res)=>{
     const albID = req.params.albID;
-    const q = "DELETE FROM album WHERE albID = ?"
+    
+    const q = "SELECT albPhoto FROM album WHERE albID = ?";
 
-    db.query (q, [albID], (err, data)=>{
-        if(err) return res.json(err);
-        return res.json("Deleted.");
-    })
+    db.query(q, [albID], (err, data) => {
+      if (err) {
+        return res.json(err);
+      }
+  
+      if (data.length === 0) {
+        return res.status(404).json("Album not found.");
+      }
+  
+      const album = data[0];
+      const albPhotoPath = `./album-photo/${album.albPhoto}`;
+  
+      // Delete album photo from the local disk
+      fs.unlink(albPhotoPath, (err) => {
+        if (err) {
+          console.log("Error deleting album photo:", err);
+        }
+      });
+  
+      // Delete album from the database
+      const deleteQuery = "DELETE FROM album WHERE albID = ?";
+  
+      db.query(deleteQuery, [albID], (err, data) => {
+        if (err) {
+          return res.json(err);
+        }
+
+        return res.json("Album deleted.");
+      });
+    });
 })
 
 app.put("/discography/:albID", upload.single('albPhoto'), (req, res) => {
