@@ -101,10 +101,10 @@ const UpdateAlbum = () => {
         <input type="date" value={albumData.albRelDate} onChange={handleChange} name="albRelDate"/>
         <select name="albType" value={albumData.albType} onChange={handleChange}>
             <option value="">Select Album Type</option>
-            <option value="single">Single Album</option>
-            <option value="mini">Mini Album</option>
-            <option value="studio">Studio Album</option>
-            <option value="digitalSingle">Digital Single</option>
+            <option value="Studio Album">Studio Album</option>
+            <option value="Single Album">Single Album</option>
+            <option value="Mini Album">Mini Album</option>
+            <option value="Digital Single">Digital Single</option>
         </select>
         <button type="submit">Update</button>
       </form>
