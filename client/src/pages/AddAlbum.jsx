@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const AddAlbum = () => {
-    
+    const { albType } = useParams(); // Retrieve the album type from the URL parameters
+
+
     const [albumData, setAlbumData] = useState({
         albTitle: "",
         albPhoto: null,
@@ -11,7 +13,7 @@ const AddAlbum = () => {
         albLanguage: "",
         albRelDate: null,
         // albLength: null,
-        albType: ""
+        albType: albType
         // albNoOfSongs: null
       });
     
@@ -69,13 +71,13 @@ const AddAlbum = () => {
                 <input type="text" placeholder="Album Language" onChange={handleChange} name="albLanguage" />
                 <input type="date" onChange={handleChange} name="albRelDate" />
                 {/* <input type="time" onChange={handleChange} name="albLength" /> */}
-                <select name="albType" onChange={handleChange}>
+                {/* <select name="albType" onChange={handleChange}>
                     <option value="">Select Album Type</option>
                     <option value="single">Single Album</option>
                     <option value="mini">Mini Album</option>
                     <option value="studio">Studio Album</option>
                     <option value="digitalSingle">Digital Single</option>
-                </select>
+                </select> */}
                 {/* <input type="number" placeholder="Number of Songs" onChange={handleChange} name="albNoOfSongs" /> */}
                 <button type="submit">Add</button>
           </form>

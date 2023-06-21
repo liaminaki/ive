@@ -45,7 +45,7 @@ const Album = () => {
                 ))}
             </div>
             <button>
-                <Link to="/discography/add">Add new album</Link>
+                <Link to={`/discography/${albType}/add`}>Add new album</Link>
             </button>
         </div>
     )
