@@ -12,7 +12,7 @@ const UpdateAlbum = () => {
     previewAlbPhoto: null,
     albLanguage: '',
     albRelDate: new Date().toISOString().split('T')[0], // Set initial value to current date
-    albType: '',
+    albTypeID: '',
   });
 
   // Prefill
@@ -27,7 +27,7 @@ const UpdateAlbum = () => {
           albTitle: album.albTitle,
           albLanguage: album.albLanguage,
           albRelDate: album.albRelDate ? adjustToClientTimezone(album.albRelDate) : '',
-          albType: album.albType,
+          albTypeID: album.albTypeID,
           albPhoto: album.albPhoto,
           previewAlbPhoto: album.albPhoto ? `http://localhost:8800/album-photo/${album.albPhoto}` : null, 
         });
@@ -68,14 +68,14 @@ const UpdateAlbum = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { albTitle, albPhoto, albLanguage, albRelDate, albLength, albType, albNoOfSongs } = albumData;
+    const { albTitle, albPhoto, albLanguage, albRelDate, albLength, albTypeID, albNoOfSongs } = albumData;
 
     const albumDataToUpdate = new FormData();
     albumDataToUpdate.append('albTitle', albTitle);
     albumDataToUpdate.append('albPhoto', albPhoto); 
     albumDataToUpdate.append('albLanguage', albLanguage);
     albumDataToUpdate.append('albRelDate', albRelDate);
-    albumDataToUpdate.append('albType', albType);
+    albumDataToUpdate.append('albTypeID', albTypeID);
 
     try {
       await axios.put(`http://localhost:8800/discography/${albID}`, albumDataToUpdate);
@@ -99,7 +99,7 @@ const UpdateAlbum = () => {
         )}
         <input type="text" placeholder="Album Language" value={albumData.albLanguage} onChange={handleChange} name="albLanguage" />
         <input type="date" value={albumData.albRelDate} onChange={handleChange} name="albRelDate"/>
-        <select name="albType" value={albumData.albType} onChange={handleChange}>
+        <select name="albTypeID" value={albumData.albTypeID} onChange={handleChange}>
             <option value="">Select Album Type</option>
             <option value="single">Single Album</option>
             <option value="mini">Mini Album</option>

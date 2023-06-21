@@ -48,9 +48,9 @@ app.post("/discography", upload.single('albPhoto'), (req,res)=>{
                     req.file.filename,
                     req.body.albLanguage,
                     req.body.albRelDate,
-                    req.body.albType];
+                    req.body.albTypeID];
     
-    const q = "INSERT INTO album (`albTitle`, `albPhoto`, `albLanguage`, `albRelDate`, `albType`) VALUES (?)";
+    const q = "INSERT INTO album (`albTitle`, `albPhoto`, `albLanguage`, `albRelDate`, `albTypeID`) VALUES (?)";
     
     db.query(q,[values],(err, data)=>{
         if(err) return res.json(err);
@@ -58,10 +58,10 @@ app.post("/discography", upload.single('albPhoto'), (req,res)=>{
     })
 })
 
-app.get("/discography/:albType", (req, res) => {
-    const albType = req.params.albType;
-    const q = "SELECT * FROM album WHERE albType = ? ORDER BY albRelDate DESC";
-    db.query(q, [albType], (err, data) => {
+app.get("/discography/:albTypeID", (req, res) => {
+    const albTypeID = req.params.albTypeID;
+    const q = "SELECT * FROM album WHERE albTypeID = ? ORDER BY albRelDate DESC";
+    db.query(q, [albTypeID], (err, data) => {
         if (err) return res.json(err);
         return res.json(data);
     });
@@ -112,10 +112,10 @@ app.put("/discography/:albID", upload.single('albPhoto'), (req, res) => {
       req.file ? req.file.filename : null, // Check if a new albPhoto is provided
       req.body.albLanguage,
       req.body.albRelDate,
-      req.body.albType
+      req.body.albTypeID
     ];
   
-    const q = "UPDATE album SET `albTitle` = ?, `albPhoto` = IFNULL(?, `albPhoto`), `albLanguage` = ?, `albRelDate` = ?, `albType` = ? WHERE `albID` = ?";
+    const q = "UPDATE album SET `albTitle` = ?, `albPhoto` = IFNULL(?, `albPhoto`), `albLanguage` = ?, `albRelDate` = ?, `albTypeID` = ? WHERE `albID` = ?";
   
     db.query(q, [...values, albID], (err, data) => {
       if (err) {
@@ -128,7 +128,7 @@ app.put("/discography/:albID", upload.single('albPhoto'), (req, res) => {
 app.get("/discography/albumType/:albID", (req, res) => {
     const albID = req.params.albID;
   
-    const q = "SELECT albTitle, albLanguage, albRelDate, albType, albPhoto FROM album WHERE albID = ?";
+    const q = "SELECT albTitle, albLanguage, albRelDate, albTypeID, albPhoto FROM album WHERE albID = ?";
   
     db.query(q, [albID], (err, data) => {
       if (err) {

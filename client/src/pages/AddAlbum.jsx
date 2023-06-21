@@ -11,7 +11,7 @@ const AddAlbum = () => {
         albLanguage: "",
         albRelDate: null,
         // albLength: null,
-        albType: ""
+        albTypeID: ""
         // albNoOfSongs: null
       });
     
@@ -35,7 +35,7 @@ const AddAlbum = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
     
-        const { albTitle, albPhoto, albLanguage, albRelDate, albLength, albType, albNoOfSongs } = albumData;
+        const { albTitle, albPhoto, albLanguage, albRelDate, albLength, albTypeID, albNoOfSongs } = albumData;
     
         const albumDataToAdd = new FormData();
         albumDataToAdd.append("albTitle", albTitle);
@@ -43,7 +43,7 @@ const AddAlbum = () => {
         albumDataToAdd.append("albLanguage", albLanguage);
         albumDataToAdd.append("albRelDate", albRelDate);
         // albumDataToAdd.append("albLength", albLength);
-        albumDataToAdd.append("albType", albType);
+        albumDataToAdd.append("albTypeID", albTypeID);
         // albumDataToAdd.append("albNoOfSongs", albNoOfSongs);
     
         try {
@@ -69,7 +69,7 @@ const AddAlbum = () => {
                 <input type="text" placeholder="Album Language" onChange={handleChange} name="albLanguage" />
                 <input type="date" onChange={handleChange} name="albRelDate" />
                 {/* <input type="time" onChange={handleChange} name="albLength" /> */}
-                <select name="albType" onChange={handleChange}>
+                <select name="albTypeID" onChange={handleChange}>
                     <option value="">Select Album Type</option>
                     <option value="single">Single Album</option>
                     <option value="mini">Mini Album</option>
