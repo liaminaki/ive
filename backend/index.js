@@ -125,7 +125,7 @@ app.put("/discography/:albID", upload.single('albPhoto'), (req, res) => {
     });
   });
 
-app.get("/discography/:albID", (req, res) => {
+app.get("/discography/albumType/:albID", (req, res) => {
     const albID = req.params.albID;
   
     const q = "SELECT albTitle, albLanguage, albRelDate, albType, albPhoto FROM album WHERE albID = ?";
