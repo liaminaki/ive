@@ -14,15 +14,23 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Discography/>}/>
-          <Route path="/discography" element={<Album/>}/>
-          <Route path="/discography/all-songs" element={<AllSongs/>}/>
-          <Route path="/discography/:albType" element={<Album/>}/>
-          <Route path="/discography/:albType/add" element={<AddAlbum/>}/>
-          <Route path="/discography/update/:albID/:albTitle" element={<UpdateAlbum/>}/>
-          <Route path="/discography/:albType/:albID/:albTitle" element={<Song/>}/>
-          <Route path="/discography/:albType/:albID/:albTitle/add" element={<AddSong/>}/>
-          <Route path="/discography/:albType/:albID/:albTitle/update/:sID/:sTitle" element={<UpdateSong/>}/>
+          <Route path="/"/>
+          <Route path="/discography">
+            <Route index element={<Discography/>}/>
+            <Route path="all-songs" element={<AllSongs/>}/>
+            <Route path="update/:albID/:albTitle" element={<UpdateAlbum/>}/>
+            
+            <Route path=":albType">
+              <Route index element={<Album/>}/>
+              <Route path="add" element={<AddAlbum/>}/>
+              
+              <Route path=":albID/:albTitle">
+                <Route index element={<Song/>}/>
+                <Route path="add" element={<AddSong/>}/>
+                <Route path="update/:sID/:sTitle" element={<UpdateSong/>}/>
+              </Route>
+            </Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
