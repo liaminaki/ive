@@ -12,9 +12,9 @@ const AddAlbum = () => {
         previewAlbPhoto: null,
         albLanguage: "",
         albRelDate: null,
-        // albLength: null,
-        albType: albType
-        // albNoOfSongs: null
+        albType: albType,
+        albGenre: '',
+        albColor: '',
       });
     
       const handleChange = (e) => {
@@ -37,16 +37,16 @@ const AddAlbum = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
     
-        const { albTitle, albPhoto, albLanguage, albRelDate, albLength, albType, albNoOfSongs } = albumData;
+        const { albTitle, albPhoto, albLanguage, albRelDate, albLength, albType, albNoOfSongs, albGenre, albColor} = albumData;
     
         const albumDataToAdd = new FormData();
         albumDataToAdd.append("albTitle", albTitle);
         albumDataToAdd.append("albPhoto", albPhoto);
         albumDataToAdd.append("albLanguage", albLanguage);
         albumDataToAdd.append("albRelDate", albRelDate);
-        // albumDataToAdd.append("albLength", albLength);
         albumDataToAdd.append("albType", albType);
-        // albumDataToAdd.append("albNoOfSongs", albNoOfSongs);
+        albumDataToAdd.append("albGenre", albGenre);
+        albumDataToAdd.append("albColor", albColor);
     
         try {
           await axios.post("http://localhost:8800/album", albumDataToAdd);
@@ -79,6 +79,8 @@ const AddAlbum = () => {
                     <option value="digitalSingle">Digital Single</option>
                 </select> */}
                 {/* <input type="number" placeholder="Number of Songs" onChange={handleChange} name="albNoOfSongs" /> */}
+                <input type="text" placeholder="Album Genre" value={albumData.albGenre} onChange={handleChange} name="albGenre" />
+                <input type="text" placeholder="Album Color" value={albumData.albColor} onChange={handleChange} name="albColor" />
                 <button type="submit">Add</button>
           </form>
         </div>
