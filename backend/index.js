@@ -152,12 +152,12 @@ app.get("/album-types", (req, res) => {
     });
 });
 
-app.get("/discography/albType/:albID/songs", (req, res) => {
-    const albID = req.params.albID;
+app.get("/discography/albType/:albTitle/songs", (req, res) => {
+    const albTitle = req.params.albTitle;
   
-    const q = "SELECT * FROM song WHERE albID = ?";
+    const q = "SELECT * FROM song WHERE albID in (SELECT albID FROM album WHERE albTitle = ?)";
   
-    db.query(q, [albID], (err, data) => {
+    db.query(q, [albTitle], (err, data) => {
       if (err) {
         return res.status(500).json(err);
       }

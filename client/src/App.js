@@ -16,7 +16,7 @@ function App() {
           <Route path="/discography/:albType" element={<Album/>}/>
           <Route path="/discography/:albType/add" element={<AddAlbum/>}/>
           <Route path="/discography/update/:albID" element={<UpdateAlbum/>}/>
-          <Route path="/discography/:albType/:albID" element={<Song/>}/>
+          <Route path="/discography/:albType/:albTitle" element={<Song/>}/>
         </Routes>
       </BrowserRouter>
     </div>

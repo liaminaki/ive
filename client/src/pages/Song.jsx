@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom'
 
 const Song = () => {
 
-    const { albID } = useParams(); // Retrieve the album ID from the URL parameters
+    const { albTitle } = useParams(); // Retrieve the album ID from the URL parameters
 
     const [song, setSong] = useState([])
 
@@ -12,7 +12,7 @@ const Song = () => {
     useEffect(() => {
         const fetchAllSong = async () => {
             try{
-                const res = await axios.get(`http://localhost:8800/discography/albType/${albID}/songs`)
+                const res = await axios.get(`http://localhost:8800/discography/albType/${albTitle}/songs`)
                 console.log(res)
                 setSong(res.data);
             } catch(err){
@@ -36,7 +36,7 @@ const Song = () => {
         <div>
             <h1>Songs</h1>
             <div className="song">
-                <h2>{albID}</h2>
+                <h2>{albTitle}</h2>
                 {song.map((song)=>(
                     <div className="song" key={song.sID}>
                         <p>{song.sTitle}</p>
@@ -47,7 +47,7 @@ const Song = () => {
                 ))}
             </div>
             <button>
-                <Link to={`/discography/${albID}/add`}>Add new song</Link>
+                Add{/* <Link to={`/discography/${albTitle}/add`}>Add new song</Link> */}
             </button>
         </div>
     )
