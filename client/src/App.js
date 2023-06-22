@@ -8,13 +8,14 @@ import Song from './pages/Song';
 import AllSongs from './pages/AllSongs';
 import AddSong from './pages/AddSong';
 import UpdateSong from './pages/UpdateSong';
+import Home from './pages/Home';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/"/>
+          <Route path="/" element={<Home/>}/>
           <Route path="/discography">
             <Route index element={<Discography/>}/>
             <Route path="all-songs" element={<AllSongs/>}/>
