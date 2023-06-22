@@ -95,16 +95,23 @@ app.delete("/album/:albID", (req,res)=>{
         }
       });
   
-      // Delete album from the database
-      const deleteQuery = "DELETE FROM album WHERE albID = ?";
-  
-      db.query(deleteQuery, [albID], (err, data) => {
+    // Delete album from the database
+    const deleteAlbumQuery = "DELETE FROM album WHERE albID = ?";
+    const deleteSongsQuery = "DELETE FROM song WHERE albID = ?";
+
+    db.query(deleteSongsQuery, [albID], (err, songData) => {
+      if (err) {
+        return res.json(err);
+      }
+
+      db.query(deleteAlbumQuery, [albID], (err, albumData) => {
         if (err) {
           return res.json(err);
         }
 
-        return res.json("Album deleted.");
+        return res.json("Album and associated songs deleted.");
       });
+    });
     });
 })
 
