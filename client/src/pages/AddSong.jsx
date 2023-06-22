@@ -34,7 +34,7 @@ const AddSong = () => {
 
   return (
     <div>
-      <h1>Add new song</h1>
+      <h1>Add new song in {albTitle}</h1>
       <form onSubmit={handleSubmit}>
         <input type="number" placeholder="Song Order" onChange={handleChange} name="sOrder" />
         <input type="text" placeholder="Song Title" onChange={handleChange} name="sTitle" />

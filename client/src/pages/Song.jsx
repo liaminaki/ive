@@ -24,9 +24,19 @@ const Song = () => {
         fetchSong()
     },[])
 
-    const handleDelete = async (sID) =>{
+    const handleDeleteSong = async (sID) =>{
         try{
             await axios.delete(`http://localhost:8800/album/albType/albTitle/songs/${sID}`)
+            window.location.reload() // Refresh page
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
+
+    const handleDeleteAlbum = async (albID) =>{
+        try{
+            await axios.delete(`http://localhost:8800/album/${albID}`)
             window.location.reload() // Refresh page
         }
         catch(err){
@@ -39,14 +49,14 @@ const Song = () => {
             <h1>Songs</h1>
             <div className="song">
                 <h2>{albTitle}</h2>
-                {/* <button className='delete' onClick={()=>handleDelete(albID)}>Delete</button>           */}
+                <button className='delete' onClick={()=>handleDeleteAlbum(albID)}>Delete</button>          
                 <button className='update'><Link to={`/discography/update/${albID}/${albTitle}`}>Update</Link></button>
 
                 {song.map((song)=>(
                     <div className="song" key={song.sID}>
                         <p>{song.sTitle}</p>
                         {/* <img src={song.image} alt="Song" style={{ width: '200px' }} /> */}
-                        <button className='delete' onClick={()=>handleDelete(song.sID)}>Delete</button>          
+                        <button className='delete' onClick={()=>handleDeleteSong(song.sID)}>Delete</button>          
                         <button className='update'><Link to={`/discography/${albType}/${albID}/${albTitle}/update/${song.sID}/${song.sTitle}`}>Update</Link></button>                  
                     </div>
                 ))}
