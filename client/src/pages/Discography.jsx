@@ -3,14 +3,14 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Discography = () => {
-  const [albumTypes, setAlbumTypes] = useState([]);
+  const [mediaTypes, setMediaTypes] = useState([]);
   const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
-    const fetchAlbumTypes = async () => {
+    const fetchMediaTypes = async () => {
       try {
-        const res = await axios.get('http://localhost:8800/album-types');
-        setAlbumTypes(res.data);
+        const res = await axios.get('http://localhost:8800/mediaTypes');
+        setMediaTypes(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -25,7 +25,7 @@ const Discography = () => {
       }
     };
 
-    fetchAlbumTypes();
+    fetchMediaTypes();
     fetchAllAlbums();
   }, []);
 
@@ -35,22 +35,30 @@ const Discography = () => {
   return (
     <div>
       <h1>Discography</h1>
-      <div className="album-type">
-        {albumTypes.map((albumType) => {
-          const filteredAlbums = filterAlbumsByType(albumType.albType);
-          const limitedAlbums = limitAlbums(filteredAlbums, 3);
+      <div className="media-type">
+        {mediaTypes.map((aMediaType) => {
+          
+          if (aMediaType.mediaType !== 'All Songs') {
+            const filteredAlbums = filterAlbumsByType(aMediaType.mediaType);
+            const limitedAlbums = limitAlbums(filteredAlbums, 3);
 
-          return (
-            <div key={albumType.albType}>
-              <h2>{albumType.albType}</h2>
-              {limitedAlbums.map((album) => (
-                <div className="album" key={album.albID}>
-                  <p>{album.albTitle}</p>
+            return (
+              <div key={aMediaType.mediaType}>
+                <Link to={`/discography/${aMediaType.mediaType}`}><h2>{aMediaType.mediaType}</h2></Link>
+                {limitedAlbums.map((album) => (
+                  <div className="album" key={album.albID}>
+                    <Link to={`/discography/${aMediaType.mediaType}/${album.albTitle}`}>{album.albTitle}</Link>
+                  </div>
+                ))}
+              </div>
+            );
+          } else {
+            return (
+                <div key={aMediaType.mediaType}>
+                <Link to={`/discography/${aMediaType.mediaType}`}><h2>{aMediaType.mediaType}</h2></Link>
                 </div>
-              ))}
-              <Link to={`/discography/${albumType.albType}`}>See All</Link>
-            </div>
-          );
+            ); 
+          }
         })}
       </div>
     </div>
