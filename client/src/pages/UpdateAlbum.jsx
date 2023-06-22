@@ -23,6 +23,8 @@ const UpdateAlbum = () => {
       try {
         const res = await axios.get(`http://localhost:8800/album/albType/${albID}`);
         const album = res.data;
+
+        console.log(album)
     
         setAlbumData({
           albTitle: album.albTitle,
@@ -84,7 +86,7 @@ const UpdateAlbum = () => {
 
     try {
       await axios.put(`http://localhost:8800/album/${albID}`, albumDataToUpdate);
-      navigate('/discography');
+      navigate(`/discography/${albType}/${albID}/${albTitle}`);
     } catch (err) {
       console.log(err);
     }

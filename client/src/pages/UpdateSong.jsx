@@ -33,7 +33,7 @@ const UpdateSong= () => {
 
     try {
       await axios.put(`http://localhost:8800/album/albType/albTitle/songs/${sID}`, songData);
-      navigate("/");
+      navigate(`/discography/${albType}/${albID}/${albTitle}`);
     } catch (err) {
       console.log(err);
     }

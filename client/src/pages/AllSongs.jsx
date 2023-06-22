@@ -32,9 +32,6 @@ const AllSongs = () => {
                     </div>
                 ))}
             </div>
-            <button>
-                Add{/* <Link to={`/discography/${albTitle}/add`}>Add new song</Link> */}
-            </button>
         </div>
     )
 }

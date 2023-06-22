@@ -50,7 +50,7 @@ const AddAlbum = () => {
     
         try {
           await axios.post("http://localhost:8800/album", albumDataToAdd);
-          navigate("/");
+          navigate(`/discography/${albType}`);
         } catch (err) {
           console.log(err);
         }

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AddSong = () => {
+  const { albType } = useParams();
   const { albID } = useParams();
   const { albTitle } = useParams();
 
@@ -26,7 +27,7 @@ const AddSong = () => {
 
     try {
       await axios.post("http://localhost:8800/album/albType/albTitle/songs/", songData);
-      navigate("/");
+      navigate(`/discography/${albType}/${albID}/${albTitle}`);
     } catch (err) {
       console.log(err);
     }
