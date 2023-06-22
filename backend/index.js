@@ -152,6 +152,19 @@ app.get("/album-types", (req, res) => {
     });
 });
 
+app.get("/discography/albType/:albID/songs", (req, res) => {
+    const albID = req.params.albID;
+  
+    const q = "SELECT * FROM song WHERE albID = ?";
+  
+    db.query(q, [albID], (err, data) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      return res.json(data);
+    });
+  });
+
 
 app.listen(8800, ()=>{
     console.log("Connected to backend!")
