@@ -19,7 +19,7 @@ const UpdateAlbum = () => {
   useEffect(() => {
     const fetchAlbumData = async () => {
       try {
-        const res = await axios.get(`http://localhost:8800/discography/albumType/${albID}`);
+        const res = await axios.get(`http://localhost:8800/album/albType/${albID}`);
         const album = res.data;
 
       
@@ -78,7 +78,7 @@ const UpdateAlbum = () => {
     albumDataToUpdate.append('albType', albType);
 
     try {
-      await axios.put(`http://localhost:8800/discography/${albID}`, albumDataToUpdate);
+      await axios.put(`http://localhost:8800/album/${albID}`, albumDataToUpdate);
       navigate('/discography');
     } catch (err) {
       console.log(err);

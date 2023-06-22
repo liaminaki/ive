@@ -18,7 +18,7 @@ const Discography = () => {
 
     const fetchAllAlbums = async () => {
       try {
-        const res = await axios.get('http://localhost:8800/discography');
+        const res = await axios.get('http://localhost:8800/album');
         setAlbums(res.data);
       } catch (err) {
         console.log(err);

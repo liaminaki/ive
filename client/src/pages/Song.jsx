@@ -12,7 +12,7 @@ const Song = () => {
     useEffect(() => {
         const fetchSong = async () => {
             try{
-                const res = await axios.get(`http://localhost:8800/discography/albType/${albTitle}/songs`)
+                const res = await axios.get(`http://localhost:8800/album/albType/${albTitle}/songs`)
                 console.log(res)
                 setSong(res.data);
             } catch(err){
@@ -24,7 +24,7 @@ const Song = () => {
 
     const handleDelete = async (sID) =>{
         try{
-            await axios.delete(`http://localhost:8800/discography/albType/albTitle/songs/${sID}`)
+            await axios.delete(`http://localhost:8800/album/albType/albTitle/songs/${sID}`)
             window.location.reload() // Refresh page
         }
         catch(err){

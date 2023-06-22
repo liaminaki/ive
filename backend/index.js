@@ -34,7 +34,7 @@ app.get("/", (req,res)=>{
     res.json("This is the backend!")
 })
 
-app.get("/discography", (req, res) => {
+app.get("/album", (req, res) => {
     const q = "SELECT * FROM album ORDER BY albRelDate DESC"; // Sort list from latest to oldest
     db.query(q, (err, data) => {
       if (err) return res.json(err);
@@ -42,7 +42,7 @@ app.get("/discography", (req, res) => {
     });
 });
 
-app.post("/discography", upload.single('albPhoto'), (req,res)=>{
+app.post("/album", upload.single('albPhoto'), (req,res)=>{
     
     const values = [req.body.albTitle,
                     req.file.filename,
@@ -58,7 +58,7 @@ app.post("/discography", upload.single('albPhoto'), (req,res)=>{
     })
 })
 
-app.get("/discography/:albType", (req, res) => {
+app.get("/album/:albType", (req, res) => {
     const albType = req.params.albType;
     const q = "SELECT * FROM album WHERE albType = ? ORDER BY albRelDate DESC";
     db.query(q, [albType], (err, data) => {
@@ -67,7 +67,7 @@ app.get("/discography/:albType", (req, res) => {
     });
 });
 
-app.delete("/discography/:albID", (req,res)=>{
+app.delete("/album/:albID", (req,res)=>{
     const albID = req.params.albID;
     
     const q = "SELECT albPhoto FROM album WHERE albID = ?";
@@ -104,7 +104,7 @@ app.delete("/discography/:albID", (req,res)=>{
     });
 })
 
-app.put("/discography/:albID", upload.single('albPhoto'), (req, res) => {
+app.put("/album/:albID", upload.single('albPhoto'), (req, res) => {
     const albID = req.params.albID;
   
     const values = [
@@ -125,7 +125,7 @@ app.put("/discography/:albID", upload.single('albPhoto'), (req, res) => {
     });
   });
 
-app.get("/discography/albumType/:albID", (req, res) => {
+app.get("/album/albType/:albID", (req, res) => {
     const albID = req.params.albID;
   
     const q = "SELECT albTitle, albLanguage, albRelDate, albType, albPhoto FROM album WHERE albID = ?";
@@ -152,7 +152,7 @@ app.get("/mediaTypes", (req, res) => {
     });
 });
 
-app.get("/discography/albType/:albTitle/songs", (req, res) => {
+app.get("/album/albType/:albTitle/songs", (req, res) => {
     const albTitle = req.params.albTitle;
   
     const q = "SELECT * FROM song WHERE albID in (SELECT albID FROM album WHERE albTitle = ?)";
@@ -165,7 +165,7 @@ app.get("/discography/albType/:albTitle/songs", (req, res) => {
     });
   });
 
-app.delete("/discography/albType/albTitle/songs/:sID", (req,res)=>{
+app.delete("/album/albType/albTitle/songs/:sID", (req,res)=>{
     
     const sID = req.params.sID;
 
@@ -179,7 +179,7 @@ app.delete("/discography/albType/albTitle/songs/:sID", (req,res)=>{
     });
 });
 
-app.get('/allSongs', (req, res) => {
+app.get('/album/allSongs', (req, res) => {
     const q = 'SELECT * FROM song';
   
     db.query(q, (err, data) => {

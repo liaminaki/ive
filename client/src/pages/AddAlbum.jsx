@@ -49,7 +49,7 @@ const AddAlbum = () => {
         // albumDataToAdd.append("albNoOfSongs", albNoOfSongs);
     
         try {
-          await axios.post("http://localhost:8800/discography", albumDataToAdd);
+          await axios.post("http://localhost:8800/album", albumDataToAdd);
           navigate("/");
         } catch (err) {
           console.log(err);

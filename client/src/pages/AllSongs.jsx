@@ -9,7 +9,7 @@ const AllSongs = () => {
     useEffect(() => {
         const fetchAllSongs = async () => {
             try{
-                const res = await axios.get("http://localhost:8800/allSongs")
+                const res = await axios.get("http://localhost:8800/album/allSongs")
                 console.log(res)
                 setAllSongs(res.data);
             } catch(err){

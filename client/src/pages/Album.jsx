@@ -10,7 +10,7 @@ const Album = () => {
     useEffect(() => {
         const fetchAllAlbum = async () => {
             try{
-                const res = await axios.get(`http://localhost:8800/discography/${albType}`)
+                const res = await axios.get(`http://localhost:8800/album/${albType}`)
                 console.log(res)
                 setAlbum(res.data);
             } catch(err){
@@ -22,7 +22,7 @@ const Album = () => {
 
     const handleDelete = async (albID) =>{
         try{
-            await axios.delete("http://localhost:8800/discography/"+albID)
+            await axios.delete(`http://localhost:8800/album/${albID}`)
             window.location.reload() // Refresh page
         }
         catch(err){
