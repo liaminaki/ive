@@ -21,7 +21,8 @@ const UpdateAlbum = () => {
       try {
         const res = await axios.get(`http://localhost:8800/album/albType/${albID}`);
         const album = res.data;
-
+        console.log(album);
+        console.log(album.albTitle);
       
         setAlbumData({
           albTitle: album.albTitle,

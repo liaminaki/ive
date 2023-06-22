@@ -179,7 +179,8 @@ app.delete("/album/albType/albTitle/songs/:sID", (req,res)=>{
     });
 });
 
-app.get('/album/allSongs', (req, res) => {
+
+app.get('/allSongs', (req, res) => {
     const q = 'SELECT * FROM song';
   
     db.query(q, (err, data) => {
@@ -190,6 +191,64 @@ app.get('/album/allSongs', (req, res) => {
       return res.json(data);
     });
   });
+
+// Get individual song
+app.get("/album/albType/albTitle/songs/:sID", (req,res)=>{
+    const sID = req.params.sID
+
+    const q = "SELECT sOrder, sTitle, sLengthInSeconds, sRelDate FROM song WHERE sID = ?"; // Sort list from latest to oldest
+    db.query(q, [sID], (err, data) => {
+        if (err) {
+            return res.status(500).json(err);
+          }
+      
+          if (data.length === 0) {
+            return res.status(404).json("Album not found.");
+          }
+      
+          const song = data[0];
+          return res.json(song);
+    });
+});
+
+// Add song in album
+app.post("/album/albType/albTitle/songs/", (req,res)=>{
+    
+    const values = [req.body.sOrder,
+                    req.body.sTitle,
+                    req.body.sLengthInSeconds,
+                    req.body.sRelDate,
+                    req.body.albID];
+
+    const q = "INSERT INTO song (`sOrder`, `sTitle`, `sLengthInSeconds`, `sRelDate`, `albID`) VALUES (?)";
+
+    db.query(q,[values],(err, data)=>{
+    if(err) return res.json(err);
+    return res.json("Album added.");
+    })
+});
+
+// Update Song in album
+app.put("/album/albType/albTitle/songs/:sID", (req,res)=>{
+    
+    const sID = req.params.sID;
+  
+    const values = [
+      req.body.sOrder,
+      req.body.sTitle,
+      req.body.sLengthInSeconds,
+      req.body.slbRelDate,
+    ];
+  
+    const q = "UPDATE album SET `sOrder` = ?, `sTitle` = ?, `sLengthInSeconds` = ?, `slbRelDate` = ? WHERE `sID` = ?";
+  
+    db.query(q, [...values, sID], (err, data) => {
+      if (err) {
+        return res.json(err);
+      }
+      return res.json("Song updated.");
+    });
+});
 
 app.listen(8800, ()=>{
     console.log("Connected to backend!")

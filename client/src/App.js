@@ -6,6 +6,8 @@ import UpdateAlbum from './pages/UpdateAlbum';
 import Discography from './pages/Discography';
 import Song from './pages/Song';
 import AllSongs from './pages/AllSongs';
+import AddSong from './pages/AddSong';
+import UpdateSong from './pages/UpdateSong';
 
 function App() {
   return (
@@ -17,8 +19,10 @@ function App() {
           <Route path="/discography/all-songs" element={<AllSongs/>}/>
           <Route path="/discography/:albType" element={<Album/>}/>
           <Route path="/discography/:albType/add" element={<AddAlbum/>}/>
-          <Route path="/discography/update/:albID" element={<UpdateAlbum/>}/>
-          <Route path="/discography/:albType/:albTitle" element={<Song/>}/>
+          <Route path="/discography/update/:albID/:albTitle" element={<UpdateAlbum/>}/>
+          <Route path="/discography/:albType/:albID/:albTitle" element={<Song/>}/>
+          <Route path="/discography/:albType/:albID/:albTitle/add" element={<AddSong/>}/>
+          <Route path="/discography/:albType/:albID/:albTitle/update/:sID/:sTitle" element={<UpdateSong/>}/>
         </Routes>
       </BrowserRouter>
     </div>

@@ -4,7 +4,9 @@ import { useParams, Link } from 'react-router-dom'
 
 const Song = () => {
 
-    const { albTitle } = useParams(); // Retrieve the album ID from the URL parameters
+    const { albType } = useParams(); // Retrieve the album Type from the URL parameters
+    const { albID } = useParams();
+    const { albTitle } = useParams(); // Retrieve the album Title from the URL parameters
 
     const [song, setSong] = useState([])
 
@@ -37,17 +39,20 @@ const Song = () => {
             <h1>Songs</h1>
             <div className="song">
                 <h2>{albTitle}</h2>
+                {/* <button className='delete' onClick={()=>handleDelete(albID)}>Delete</button>           */}
+                <button className='update'><Link to={`/discography/update/${albID}/${albTitle}`}>Update</Link></button>
+
                 {song.map((song)=>(
                     <div className="song" key={song.sID}>
                         <p>{song.sTitle}</p>
                         {/* <img src={song.image} alt="Song" style={{ width: '200px' }} /> */}
                         <button className='delete' onClick={()=>handleDelete(song.sID)}>Delete</button>          
-                        {/* <button className='update'><Link to={`/discography/update/${song.albID}`}>Update</Link></button>                   */}
+                        <button className='update'><Link to={`/discography/${albType}/${albID}/${albTitle}/update/${song.sID}/${song.sTitle}`}>Update</Link></button>                  
                     </div>
                 ))}
             </div>
             <button>
-                Add{/* <Link to={`/discography/${albTitle}/add`}>Add new song</Link> */}
+                <Link to={`/discography/${albType}/${albID}/${albTitle}/add`}>Add new song</Link>
             </button>
         </div>
     )

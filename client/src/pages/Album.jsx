@@ -37,10 +37,10 @@ const Album = () => {
                 <h2>{albType}</h2>
                 {album.map((album)=>(
                     <div className="album" key={album.albID}>
-                        <Link to={`/discography/${albType}/${album.albTitle}`}>{album.albTitle}</Link>
+                        <Link to={`/discography/${albType}/${album.albID}/${album.albTitle}`}>{album.albTitle}</Link>
                         {/* <img src={album.image} alt="Album" style={{ width: '200px' }} /> */}
                         <button className='delete' onClick={()=>handleDelete(album.albID)}>Delete</button>          
-                        <button className='update'><Link to={`/discography/update/${album.albID}`}>Update</Link></button>                  
+                        <button className='update'><Link to={`/discography/update/${album.albID}/${album.albTitle}`}>Update</Link></button>                  
                     </div>
                 ))}
             </div>
