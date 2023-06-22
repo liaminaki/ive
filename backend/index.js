@@ -179,6 +179,17 @@ app.delete("/discography/albType/albTitle/songs/:sID", (req,res)=>{
     });
 });
 
+app.get('/allSongs', (req, res) => {
+    const q = 'SELECT * FROM song';
+  
+    db.query(q, (err, data) => {
+      if (err) {
+        console.error('Error executing the query:', err);
+        return res.status(500).json(err);
+      }
+      return res.json(data);
+    });
+  });
 
 app.listen(8800, ()=>{
     console.log("Connected to backend!")

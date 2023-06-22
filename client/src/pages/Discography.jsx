@@ -55,7 +55,7 @@ const Discography = () => {
           } else {
             return (
                 <div key={aMediaType.mediaType}>
-                <Link to={`/discography/${aMediaType.mediaType}`}><h2>{aMediaType.mediaType}</h2></Link>
+                <Link to={`/discography/all-songs`}><h2>{aMediaType.mediaType}</h2></Link>
                 </div>
             ); 
           }

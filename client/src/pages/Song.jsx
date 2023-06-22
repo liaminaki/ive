@@ -10,7 +10,7 @@ const Song = () => {
 
     // Run for every render
     useEffect(() => {
-        const fetchAllSong = async () => {
+        const fetchSong = async () => {
             try{
                 const res = await axios.get(`http://localhost:8800/discography/albType/${albTitle}/songs`)
                 console.log(res)
@@ -19,7 +19,7 @@ const Song = () => {
                 console.log(err)
             }
         }
-        fetchAllSong()
+        fetchSong()
     },[])
 
     const handleDelete = async (sID) =>{
