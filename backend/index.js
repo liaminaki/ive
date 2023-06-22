@@ -165,6 +165,20 @@ app.get("/discography/albType/:albTitle/songs", (req, res) => {
     });
   });
 
+app.delete("/discography/albType/albTitle/songs/:sID", (req,res)=>{
+    
+    const sID = req.params.sID;
+
+    const q = "DELETE FROM song WHERE sID = ?";
+
+    db.query(q, [sID], (err, data) => {
+        if (err) {
+            return res.json(err);
+        }
+        return res.json("Album deleted.");
+    });
+});
+
 
 app.listen(8800, ()=>{
     console.log("Connected to backend!")

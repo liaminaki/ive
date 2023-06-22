@@ -22,15 +22,15 @@ const Song = () => {
         fetchAllSong()
     },[])
 
-    // const handleDelete = async (albID) =>{
-    //     try{
-    //         await axios.delete("http://localhost:8800/discography/"+albID)
-    //         window.location.reload() // Refresh page
-    //     }
-    //     catch(err){
-    //         console.log(err)
-    //     }
-    // }
+    const handleDelete = async (sID) =>{
+        try{
+            await axios.delete(`http://localhost:8800/discography/albType/albTitle/songs/${sID}`)
+            window.location.reload() // Refresh page
+        }
+        catch(err){
+            console.log(err)
+        }
+    }
   
     return (
         <div>
@@ -41,8 +41,8 @@ const Song = () => {
                     <div className="song" key={song.sID}>
                         <p>{song.sTitle}</p>
                         {/* <img src={song.image} alt="Song" style={{ width: '200px' }} /> */}
-                        {/* <button className='delete' onClick={()=>handleDelete(song.albID)}>Delete</button>          
-                        <button className='update'><Link to={`/discography/update/${song.albID}`}>Update</Link></button>                   */}
+                        <button className='delete' onClick={()=>handleDelete(song.sID)}>Delete</button>          
+                        {/* <button className='update'><Link to={`/discography/update/${song.albID}`}>Update</Link></button>                   */}
                     </div>
                 ))}
             </div>
