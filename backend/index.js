@@ -34,6 +34,7 @@ app.get("/", (req,res)=>{
     res.json("This is the backend!")
 })
 
+// Get all albums from latest to oldest
 app.get("/album", (req, res) => {
     const q = "SELECT * FROM album ORDER BY albRelDate DESC"; // Sort list from latest to oldest
     db.query(q, (err, data) => {
@@ -42,6 +43,7 @@ app.get("/album", (req, res) => {
     });
 });
 
+// Add album
 app.post("/album", upload.single('albPhoto'), (req,res)=>{
     
     const values = [req.body.albTitle,
@@ -58,6 +60,7 @@ app.post("/album", upload.single('albPhoto'), (req,res)=>{
     })
 })
 
+// Get album based on type
 app.get("/album/:albType", (req, res) => {
     const albType = req.params.albType;
     const q = "SELECT * FROM album WHERE albType = ? ORDER BY albRelDate DESC";
@@ -67,6 +70,7 @@ app.get("/album/:albType", (req, res) => {
     });
 });
 
+// Delete album based on ID
 app.delete("/album/:albID", (req,res)=>{
     const albID = req.params.albID;
     
@@ -104,6 +108,7 @@ app.delete("/album/:albID", (req,res)=>{
     });
 })
 
+// Update album based on ID
 app.put("/album/:albID", upload.single('albPhoto'), (req, res) => {
     const albID = req.params.albID;
   
@@ -125,6 +130,7 @@ app.put("/album/:albID", upload.single('albPhoto'), (req, res) => {
     });
   });
 
+// Get album based on ID
 app.get("/album/albType/:albID", (req, res) => {
     const albID = req.params.albID;
   
@@ -144,6 +150,7 @@ app.get("/album/albType/:albID", (req, res) => {
     });
   });
 
+// Get all media types
 app.get("/mediaTypes", (req, res) => {
     const q = "SELECT mediaType FROM mediaTypes ORDER BY mediaType DESC";
     db.query(q, (err, data) => {
@@ -152,6 +159,7 @@ app.get("/mediaTypes", (req, res) => {
     });
 });
 
+// Get all song based on album title
 app.get("/album/albType/:albTitle/songs", (req, res) => {
     const albTitle = req.params.albTitle;
   
@@ -165,6 +173,7 @@ app.get("/album/albType/:albTitle/songs", (req, res) => {
     });
   });
 
+// Delete a song from album using ID
 app.delete("/album/albType/albTitle/songs/:sID", (req,res)=>{
     
     const sID = req.params.sID;
@@ -179,7 +188,7 @@ app.delete("/album/albType/albTitle/songs/:sID", (req,res)=>{
     });
 });
 
-
+// Get all songs
 app.get('/allSongs', (req, res) => {
     const q = 'SELECT * FROM song';
   
