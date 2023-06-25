@@ -294,6 +294,20 @@ app.get("/member/:mID", (req, res) => {
     });
 });
 
+// Get group data
+app.get("/group", (req, res) => {
+    const q = "SELECT * FROM kpopGroup";
+    db.query(q, (err, data) => {
+      if (err) return res.json(err);
+      if (data.length === 0) {
+        return res.status(404).json("Not found.");
+      }
+
+      const group = data[0];
+      return res.json(group);
+    });
+});
+
 app.listen(8800, ()=>{
     console.log("Connected to backend!")
 })
