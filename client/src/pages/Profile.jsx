@@ -25,7 +25,8 @@ const Profile = () => {
 
         {members.map((member)=>(
             <div className="members" key={member.mID}>
-            <Link to={`/profile/${member.mID}/${member.mStageName}`}>{member.mStageName}</Link>           
+            <Link to={`/profile/${member.mID}/${member.mStageName}`}><img src={`http://localhost:8800/img/${member.mPhoto}`} width="100px" alt="Preview" /></Link>
+                       
             </div>
         ))}
     </div>

@@ -32,7 +32,7 @@ const UpdateAlbum = () => {
           albRelDate: album.albRelDate ? adjustToClientTimezone(album.albRelDate) : '',
           albType: album.albType,
           albPhoto: album.albPhoto,
-          previewAlbPhoto: album.albPhoto ? `http://localhost:8800/album-photo/${album.albPhoto}` : null, 
+          previewAlbPhoto: album.albPhoto ? `http://localhost:8800/img/album-photo/${album.albPhoto}` : null, 
           albGenre: album.albGenre,
           albColor: album.albColor,
         });

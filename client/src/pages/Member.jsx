@@ -26,6 +26,7 @@ const Member = () => {
     <div>
         <h1>HI</h1>
         <h1>{memberData.mStageName}</h1>
+        <img src={`http://localhost:8800/img/${memberData.mPhoto}`} width="100px" alt="Preview" />
         <p>Birth Name: {memberData.mBirthName}</p>
         <p>English Name: {memberData.mEnglishName}</p>
     </div>

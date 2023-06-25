@@ -15,7 +15,7 @@ const db = mysql.createConnection({
 // Create a storage engine for Multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, './album-photo/'); // Destination directory for storing uploaded files
+      cb(null, './img/album-photo/'); // Destination directory for storing uploaded files
     },
     filename: (req, file, cb) => {
       cb(null, Date.now() + '-' + file.originalname); // Generate a unique filename for each uploaded file
@@ -28,7 +28,7 @@ const app = express()
 
 app.use(express.json()) // Allow sending json file using a client
 app.use(cors()) 
-app.use('/album-photo', express.static('album-photo'))
+app.use('/img', express.static('img'))
 
 app.get("/", (req,res)=>{  
     res.json("This is the backend!")
