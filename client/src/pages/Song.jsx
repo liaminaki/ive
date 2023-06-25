@@ -12,6 +12,15 @@ const Song = () => {
     const [totalLengthInSeconds, setTotalLengthInSeconds] = useState(0);
     const [numberOfSongs, setNumberOfSongs] = useState(0);
     const [albRelYear, setAlbRelYear] = useState();
+    const [editMode, setEditMode] = useState(false);
+
+    const handleEditClick = () => {
+        setEditMode(true);
+    };
+
+    const handleDoneEdit = () => {
+        setEditMode(false);
+    };
 
     // Run for every render
     useEffect(() => {
@@ -94,21 +103,34 @@ const Song = () => {
                    {albumLength.minutes !== 0 && `${albumLength.minutes} min `}
                    {albumLength.seconds !== 0 && `${albumLength.seconds} sec `}
                 </p>
-                        
-                <button className='edit'><Link to={`/discography/update/${albID}/${albTitle}`}>Edit Album</Link></button>
+                
+                { editMode ? (
+                    <div>
+                        <button className='edit'><Link to={`/discography/update/${albID}/${albTitle}`}>Edit Album Data</Link></button>
 
-                {song.map((song)=>(
-                    <div className="song" key={song.sID}>
-                        <p>{song.sTitle}</p>
-                        {/* <img src={song.image} alt="Song" style={{ width: '200px' }} /> */}
-                        <button className='delete' onClick={()=>handleDeleteSong(song.sID)}>Delete</button>          
-                        <button className='update'><Link to={`/discography/${albType}/${albID}/${albTitle}/update/${song.sID}/${song.sTitle}`}>Update</Link></button>                  
+                        {song.map((song)=>(
+                            <div className="song" key={song.sID}>
+                                <p>{song.sTitle}</p>
+                                <button className='delete' onClick={()=>handleDeleteSong(song.sID)}>Delete</button>          
+                                <button className='update'><Link to={`/discography/${albType}/${albID}/${albTitle}/update/${song.sID}/${song.sTitle}`}>Update</Link></button>                  
+                            </div>
+                        ))}
+                        <button><Link to={`/discography/${albType}/${albID}/${albTitle}/add`}>Add new song</Link></button>
+                        <button onClick={handleDoneEdit}>Done</button>
+
                     </div>
-                ))}
+                ) : (
+                    <div>
+                    <button className='edit' onClick={handleEditClick}>Edit</button>
+                    {song.map((song)=>(
+                        <div className="song" key={song.sID}>
+                            <p>{song.sTitle}</p>                 
+                        </div>
+                    ))}
+                    </div>
+                )}
+                
             </div>
-            <button>
-                <Link to={`/discography/${albType}/${albID}/${albTitle}/add`}>Add new song</Link>
-            </button>
         </div>
     )
 }

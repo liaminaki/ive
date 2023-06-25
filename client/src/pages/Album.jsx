@@ -11,7 +11,7 @@ const Album = () => {
         setEditMode(true);
     };
 
-    const handleCancelEdit = () => {
+    const handleDoneEdit = () => {
         setEditMode(false);
     };
 
@@ -55,7 +55,7 @@ const Album = () => {
                         </div>
                         ))}
                         <button><Link to={`/discography/${albType}/add`}>Add new album</Link></button>
-                        <button onClick={handleCancelEdit}>Cancel</button>
+                        <button onClick={handleDoneEdit}>Done</button>
                     </div>
                     ) : (
                     <div>
