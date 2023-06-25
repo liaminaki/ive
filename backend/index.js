@@ -216,7 +216,7 @@ app.get('/allSongs', (req, res) => {
 app.get("/album/albType/albTitle/songs/:sID", (req,res)=>{
     const sID = req.params.sID
 
-    const q = "SELECT sOrder, sTitle, sLengthInSeconds, sRelDate FROM song WHERE sID = ?"; // Sort list from latest to oldest
+    const q = "SELECT * FROM song WHERE sID = ?"; // Sort list from latest to oldest
     db.query(q, [sID], (err, data) => {
         if (err) {
             return res.status(500).json(err);
@@ -236,11 +236,13 @@ app.post("/album/albType/albTitle/songs/", (req,res)=>{
     
     const values = [req.body.sOrder,
                     req.body.sTitle,
+                    req.body.sLengthInHours,
+                    req.body.sLengthInMinutes,
                     req.body.sLengthInSeconds,
                     req.body.sRelDate,
                     req.body.albID];
 
-    const q = "INSERT INTO song (`sOrder`, `sTitle`, `sLengthInSeconds`, `sRelDate`, `albID`) VALUES (?)";
+    const q = "INSERT INTO song (`sOrder`, `sTitle`, `sLengthInHours`, `sLengthInMinutes`,`sLengthInSeconds`, `sRelDate`, `albID`) VALUES (?)";
 
     db.query(q,[values],(err, data)=>{
     if(err) return res.json(err);
@@ -256,11 +258,13 @@ app.put("/album/albType/albTitle/songs/:sID", (req,res)=>{
     const values = [
       req.body.sOrder,
       req.body.sTitle,
+      req.body.sLengthInHours,
+      req.body.sLengthInMinutes,
       req.body.sLengthInSeconds,
-      req.body.slbRelDate,
+      req.body.sRelDate,
     ];
   
-    const q = "UPDATE album SET `sOrder` = ?, `sTitle` = ?, `sLengthInSeconds` = ?, `slbRelDate` = ? WHERE `sID` = ?";
+    const q = "UPDATE song SET `sOrder` = ?, `sTitle` = ?, `sLengthInHours` = ?, `sLengthInMinutes` = ?,`sLengthInSeconds` = ?, `sRelDate` = ? WHERE `sID` = ?";
   
     db.query(q, [...values, sID], (err, data) => {
       if (err) {

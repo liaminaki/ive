@@ -3,11 +3,16 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const UpdateSong= () => {
+  const { albType } = useParams();
+  const { albID } = useParams();
+  const { albTitle } = useParams();
   const { sID } = useParams();
 
   const [songData, setSongData] = useState({
     sOrder: 0, // Integer data type
     sTitle: '', // Varchar
+    sLengthInHours: 0,
+    sLengthInMinutes: 0,
     sLengthInSeconds: 0, // Integer
     sRelDate: new Date().toISOString().split('T')[0],
   });
@@ -44,17 +49,20 @@ const UpdateSong= () => {
       try {
         const res = await axios.get(`http://localhost:8800/album/albType/albTitle/songs/${sID}`);
         const song = res.data;
-        console.log(song);
-        console.log(song.sOrder);
+
+        console.log(song)
 
         setSongData({
-            sOrder: song.sOrder || 0, 
+            sOrder: song.sOrder || "", 
             sTitle: song.sTitle || '',
-            sLengthInSeconds: song.sLengthInSeconds || 0,
+            sLengthInHours: song.sLengthInHours|| "",
+            sLengthInMinutes: song.sLengthInMinutes || "",
+            sLengthInSeconds: song.sLengthInSeconds || "",
             sRelDate: song.sRelDate ? adjustToClientTimezone(song.sRelDate) : '',
         });
 
-        //console.log(songData);
+        console.log(songData.sOrder)
+    
       } catch (err) {
         console.log(err);
       }
@@ -69,6 +77,8 @@ const UpdateSong= () => {
       <form onSubmit={handleSubmit}>
         <input type="number" placeholder="Song Order" value={songData.sOrder} onChange={handleChange} name="sOrder" />
         <input type="text" placeholder="Song Title" value={songData.sTitle} onChange={handleChange} name="sTitle" />
+        <input type="number" placeholder="Length (hours)" value={songData.sLengthInHours} onChange={handleChange} name="sLengthInHours" />
+        <input type="number" placeholder="Length (minutes)" value={songData.sLengthInMinutes} onChange={handleChange} name="sLengthInMinutes" />
         <input type="number" placeholder="Length (seconds)" value={songData.sLengthInSeconds} onChange={handleChange} name="sLengthInSeconds" />
         <input type="date" value={songData.sRelDate} onChange={handleChange} name="sRelDate" />
         <button type="submit">Update</button>

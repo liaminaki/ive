@@ -47,7 +47,7 @@ const Discography = () => {
                 <Link to={`/discography/${anAlbumType.albType}`}><h2>{anAlbumType.albType}</h2></Link>
                 {limitedAlbums.map((album) => (
                   <div className="album" key={album.albID}>
-                    <Link to={`/discography/${anAlbumType.mediaType}/${album.albID}/${album.albTitle}`}>{album.albTitle}</Link>
+                    <Link to={`/discography/${anAlbumType.albType}/${album.albID}/${album.albTitle}`}>{album.albTitle}</Link>
                   </div>
                 ))}
               </div>

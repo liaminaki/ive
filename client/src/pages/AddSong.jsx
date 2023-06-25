@@ -10,6 +10,8 @@ const AddSong = () => {
   const [songData, setSongData] = useState({
     sOrder: null, // Integer data type
     sTitle: '', // Varchar
+    sLengthInHours: null,
+    sLengthInMinutes: null,
     sLengthInSeconds: null, // Integer
     sRelDate: null, // Date
     albID: albID, // Integer
@@ -39,6 +41,8 @@ const AddSong = () => {
       <form onSubmit={handleSubmit}>
         <input type="number" placeholder="Song Order" onChange={handleChange} name="sOrder" />
         <input type="text" placeholder="Song Title" onChange={handleChange} name="sTitle" />
+        <input type="number" placeholder="Length (hours)" value={songData.sLengthInHours} onChange={handleChange} name="sLengthInHours" />
+        <input type="number" placeholder="Length (minutes)" value={songData.sLengthInMinutes} onChange={handleChange} name="sLengthInMinutes" />
         <input type="number" placeholder="Length (seconds)" onChange={handleChange} name="sLengthInSeconds" />
         <input type="date" onChange={handleChange} name="sRelDate" />
         <button type="submit">Add</button>
