@@ -325,6 +325,19 @@ app.get("/albumLength/:albID", (req, res) => {
     });
 });
 
+// Get total number of songs
+app.get("/albumNumberOfSongs/:albID", (req, res) => {
+    const albID = req.params.albID
+    const q = "SELECT COUNT(*) AS numberOfSongs FROM song WHERE albID = ?";
+    db.query(q, [albID] ,(err, data) => {
+      if (err) return res.json(err);
+      
+      const numberOfSongs = data[0].numberOfSongs;
+      return res.json(numberOfSongs);
+        
+    });
+});
+
 app.listen(8800, ()=>{
     console.log("Connected to backend!")
 })

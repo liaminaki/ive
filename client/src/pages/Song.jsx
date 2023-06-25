@@ -10,6 +10,7 @@ const Song = () => {
 
     const [song, setSong] = useState([])
     const [totalLengthInSeconds, setTotalLengthInSeconds] = useState(0);
+    const [numberOfSongs, setNumberOfSongs] = useState(0);
 
     // Run for every render
     useEffect(() => {
@@ -31,9 +32,19 @@ const Song = () => {
               console.log(err);
             }
           };
+        
+        const fetchNumberOfSongs  = async () => {
+            try {
+              const res = await axios.get(`http://localhost:8800/albumNumberOfSongs/${albID}`);
+              setNumberOfSongs(res.data);
+            } catch (err) {
+              console.log(err);
+            }
+          };
 
         fetchSong()
         fetchTotalLengthInSeconds()
+        fetchNumberOfSongs();
     },[albID, albTitle])
 
     const handleDeleteSong = async (sID) =>{
@@ -76,7 +87,7 @@ const Song = () => {
             <h1>Songs</h1>
             <div className="song">
                 <h2>{albTitle}</h2>
-
+                <p>{numberOfSongs} songs</p>
                 <p>{albumLength.hours !== 0 && `${albumLength.hours} hr `}
                    {albumLength.minutes !== 0 && `${albumLength.minutes} min `}
                    {albumLength.seconds !== 0 && `${albumLength.seconds} sec `}
