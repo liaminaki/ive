@@ -68,16 +68,6 @@ const Song = () => {
         }
     }
 
-    const handleDeleteAlbum = async (albID) =>{
-        try{
-            await axios.delete(`http://localhost:8800/album/${albID}`)
-            window.location.reload() // Refresh page
-        }
-        catch(err){
-            console.log(err)
-        }
-    }
-
     const convertSecondsToTime = (totalLength) => {
         const hours = Math.floor(totalLength/ 3600);
         const minutes = Math.floor((totalLength % 3600) / 60);
@@ -104,9 +94,8 @@ const Song = () => {
                    {albumLength.minutes !== 0 && `${albumLength.minutes} min `}
                    {albumLength.seconds !== 0 && `${albumLength.seconds} sec `}
                 </p>
-                
-                <button className='delete' onClick={()=>handleDeleteAlbum(albID)}>Delete</button>          
-                <button className='update'><Link to={`/discography/update/${albID}/${albTitle}`}>Update</Link></button>
+                        
+                <button className='edit'><Link to={`/discography/update/${albID}/${albTitle}`}>Edit Album</Link></button>
 
                 {song.map((song)=>(
                     <div className="song" key={song.sID}>

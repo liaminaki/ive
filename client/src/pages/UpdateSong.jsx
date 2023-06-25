@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const UpdateSong= () => {
@@ -71,6 +71,16 @@ const UpdateSong= () => {
     fetchSongData();
   }, [sID]);
 
+  const handleDeleteSong = async (sID) =>{
+    try{
+        await axios.delete(`http://localhost:8800/album/albType/albTitle/songs/${sID}`)
+        navigate(`/discography/${albType}/${albID}/${albTitle}`);
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
   return (
     <div>
       <h1>Update song</h1>
@@ -81,8 +91,11 @@ const UpdateSong= () => {
         <input type="number" placeholder="Length (minutes)" value={songData.sLengthInMinutes} onChange={handleChange} name="sLengthInMinutes" />
         <input type="number" placeholder="Length (seconds)" value={songData.sLengthInSeconds} onChange={handleChange} name="sLengthInSeconds" />
         <input type="date" value={songData.sRelDate} onChange={handleChange} name="sRelDate" />
-        <button type="submit">Update</button>
+        <button type="submit">Update</button>  
       </form>
+      <button className='delete' onClick={()=>handleDeleteSong(sID)}>Delete</button>
+      <Link to={`/discography/${albType}/${albID}/${albTitle}`}><button className='cancel'>Cancel</button></Link>
+
     </div>
   );
 };

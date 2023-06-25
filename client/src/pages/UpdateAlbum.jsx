@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const UpdateAlbum = () => {
   const { albID } = useParams(); // Retrieve the album ID from the URL parameters
+  const { albType } = useParams();
+  const { albTitle } = useParams();
   const navigate = useNavigate();
 
   const [albumData, setAlbumData] = useState({
@@ -89,6 +91,16 @@ const UpdateAlbum = () => {
     }
   };
 
+  const handleDeleteAlbum = async (albID) =>{
+    try{
+        await axios.delete(`http://localhost:8800/album/${albID}`)
+        navigate(`/discography`);
+    }
+    catch(err){
+        console.log(err)
+    }
+}
+
   return (
     <div>
       <h1>Update Album</h1>
@@ -113,7 +125,10 @@ const UpdateAlbum = () => {
         <input type="text" placeholder="Album Genre" value={albumData.albGenre} onChange={handleChange} name="albGenre" />
         <button type="submit">Update</button>
       </form>
+      <button className='delete' onClick={()=>handleDeleteAlbum(albID)}>Delete</button>  
+      <Link to={`/discography/${albType}/${albID}/${albTitle}`}><button className='cancel'>Cancel</button></Link>
     </div>
+
   );
 };
 

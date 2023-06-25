@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const AddSong = () => {
@@ -47,6 +47,7 @@ const AddSong = () => {
         <input type="date" onChange={handleChange} name="sRelDate" />
         <button type="submit">Add</button>
       </form>
+      <Link to={`/discography/${albType}/${albID}/${albTitle}`}><button className='cancel'>Cancel</button></Link>
     </div>
   );
 };
