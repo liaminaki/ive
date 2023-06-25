@@ -9,6 +9,8 @@ import AllSongs from './pages/AllSongs';
 import AddSong from './pages/AddSong';
 import UpdateSong from './pages/UpdateSong';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
+import Member from './pages/Member';
 
 function App() {
   return (
@@ -16,6 +18,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>}/>
+          
+          <Route path="/profile">
+            <Route index element={<Profile/>}/>
+            <Route path=":mID/:mStageName" element={<Member/>}/>
+          </Route>
+
           <Route path="/discography">
             <Route index element={<Discography/>}/>
             <Route path="all-songs" element={<AllSongs/>}/>

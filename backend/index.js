@@ -270,6 +270,30 @@ app.put("/album/albType/albTitle/songs/:sID", (req,res)=>{
     });
 });
 
+// Get member's id, stage name and photo
+app.get("/member", (req, res) => {
+    const q = "SELECT mID, mStageName, mPhoto FROM members";
+    db.query(q, (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    });
+});
+
+// Get member data using IS
+app.get("/member/:mID", (req, res) => {
+    const mID = req.params.mID
+    const q = "SELECT * FROM members WHERE `mID` = ?";
+    db.query(q,[mID], (err, data) => {
+      if (err) return res.json(err);
+      if (data.length === 0) {
+        return res.status(404).json("Album not found.");
+      }
+  
+      const member = data[0];
+      return res.json(member);
+    });
+});
+
 app.listen(8800, ()=>{
     console.log("Connected to backend!")
 })
