@@ -312,6 +312,19 @@ app.get("/group", (req, res) => {
     });
 });
 
+// Get total length of album in seconds
+app.get("/albumLength/:albID", (req, res) => {
+    const albID = req.params.albID
+    const q = "SELECT SUM(COALESCE(sLengthInHours,0) * 3600 + COALESCE(sLengthInMinutes,0) * 60 + COALESCE(sLengthInSeconds,0)) AS totalLengthInSeconds FROM song WHERE albID = ?";
+    db.query(q, [albID] ,(err, data) => {
+      if (err) return res.json(err);
+      
+      const totalLengthInSeconds = data[0].totalLengthInSeconds;
+      return res.json(totalLengthInSeconds);
+        
+    });
+});
+
 app.listen(8800, ()=>{
     console.log("Connected to backend!")
 })

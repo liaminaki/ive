@@ -55,9 +55,9 @@ const UpdateSong= () => {
         setSongData({
             sOrder: song.sOrder || "", 
             sTitle: song.sTitle || '',
-            sLengthInHours: song.sLengthInHours|| "",
-            sLengthInMinutes: song.sLengthInMinutes || "",
-            sLengthInSeconds: song.sLengthInSeconds || "",
+            sLengthInHours: song.sLengthInHours|| 0,
+            sLengthInMinutes: song.sLengthInMinutes || 0,
+            sLengthInSeconds: song.sLengthInSeconds || 0,
             sRelDate: song.sRelDate ? adjustToClientTimezone(song.sRelDate) : '',
         });
 
