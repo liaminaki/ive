@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route,} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link} from "react-router-dom";
 import Album from './pages/Album';
 import AddAlbum from './pages/AddAlbum';
 import UpdateAlbum from './pages/UpdateAlbum';
@@ -16,8 +16,14 @@ import About from './pages/About';
 function App() {
   return (
     <div className="App">
+      
       <BrowserRouter>
+            <p><Link to={"/"}>Home </Link></p>
+            <p><Link to={"/profile"}>Profile </Link></p>
+            <p><Link to={"/discography"}>Discography </Link></p>
+            <p><Link to={"/about"}>About </Link></p>
         <Routes>
+        
           <Route path="/" element={<Home/>}/>
           
           <Route path="/profile">

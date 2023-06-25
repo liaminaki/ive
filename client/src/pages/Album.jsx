@@ -5,6 +5,16 @@ import { useParams, Link } from 'react-router-dom'
 const Album = () => {
     const { albType } = useParams(); // Retrieve the album type from the URL parameters
     const [album, setAlbum] = useState([])
+    const [editMode, setEditMode] = useState(false);
+
+    const handleEditClick = () => {
+        setEditMode(true);
+    };
+
+    const handleCancelEdit = () => {
+        setEditMode(false);
+    };
+
 
     // Run for every render
     useEffect(() => {
@@ -35,18 +45,29 @@ const Album = () => {
             <h1>Albums</h1>
             <div className="album">
                 <h2>{albType}</h2>
-                {album.map((album)=>(
-                    <div className="album" key={album.albID}>
-                        <Link to={`/discography/${albType}/${album.albID}/${album.albTitle}`}>{album.albTitle}</Link>
-                        {/* <img src={album.image} alt="Album" style={{ width: '200px' }} /> */}
-                        <button className='delete' onClick={()=>handleDeleteAlbum(album.albID)}>Delete</button>          
-                        <button className='update'><Link to={`/discography/update/${album.albID}/${album.albTitle}`}>Update</Link></button>                  
+                {editMode ? (
+                    <div>
+                        {album.map((album) => (
+                        <div className="album" key={album.albID}>
+                            <Link to={`/discography/${albType}/${album.albID}/${album.albTitle}`}>{album.albTitle}</Link>
+                            <button className="delete" onClick={() => handleDeleteAlbum(album.albID)}>Delete</button>
+                            <button className="update"><Link to={`/discography/update/${album.albID}/${album.albTitle}`}>Update</Link></button>
+                        </div>
+                        ))}
+                        <button><Link to={`/discography/${albType}/add`}>Add new album</Link></button>
+                        <button onClick={handleCancelEdit}>Cancel</button>
                     </div>
-                ))}
-            </div>
-            <button>
-                <Link to={`/discography/${albType}/add`}>Add new album</Link>
-            </button>
+                    ) : (
+                    <div>
+                        <button onClick={handleEditClick}>Edit</button>
+                        {album.map((album) => (
+                        <div className="album" key={album.albID}>
+                            <Link to={`/discography/${albType}/${album.albID}/${album.albTitle}`}>{album.albTitle}</Link>
+                        </div>
+                        ))}
+                    </div>
+                    )}
+                </div>
         </div>
     )
 }
