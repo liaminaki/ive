@@ -199,7 +199,10 @@ app.delete("/album/albType/albTitle/songs/:sID", (req,res)=>{
 
 // Get all songs
 app.get('/allSongs', (req, res) => {
-    const q = 'SELECT * FROM song';
+    const q = 'SELECT albID, sID, sTitle, sLengthInHours, \
+    sLengthInMinutes, sLengthInSeconds, sRelDate, albTitle, albType \
+    FROM song NATURAL JOIN album \
+    ORDER BY sRelDate DESC;';
   
     db.query(q, (err, data) => {
       if (err) {
@@ -348,6 +351,24 @@ app.get("/albumRelYear/:albID", (req, res) => {
   
       const albRelYear = data[0].albRelYear;
       return res.json(albRelYear);
+    });
+});
+
+// Get album release year
+app.get("/allSongs/:albType", (req, res) => {
+    const albType = req.params.albType;
+    const q = 'SELECT albID, sID, sTitle, sLengthInHours, \
+    sLengthInMinutes, sLengthInSeconds, sRelDate, albTitle, albType \
+    FROM song NATURAL JOIN album \
+    WHERE albType = ?\
+    ORDER BY sRelDate DESC;';
+  
+    db.query(q, [albType], (err, data) => {
+        if (err) {
+            console.error('Error executing the query:', err);
+            return res.status(500).json(err);
+          }
+          return res.json(data);
     });
 });
 
