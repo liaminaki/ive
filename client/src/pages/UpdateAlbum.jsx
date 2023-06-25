@@ -14,7 +14,6 @@ const UpdateAlbum = () => {
     albRelDate: new Date().toISOString().split('T')[0], // Set initial value to current date
     albType: '',
     albGenre: '',
-    albColor: '',
   });
 
   // Prefill
@@ -34,7 +33,6 @@ const UpdateAlbum = () => {
           albPhoto: album.albPhoto,
           previewAlbPhoto: album.albPhoto ? `http://localhost:8800/img/album-photo/${album.albPhoto}` : null, 
           albGenre: album.albGenre,
-          albColor: album.albColor,
         });
       } catch (err) {
         console.log(err);
@@ -73,7 +71,7 @@ const UpdateAlbum = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { albTitle, albPhoto, albLanguage, albRelDate, albLength, albType, albNoOfSongs, albGenre, albColor } = albumData;
+    const { albTitle, albPhoto, albLanguage, albRelDate, albLength, albType, albNoOfSongs, albGenre } = albumData;
 
     const albumDataToUpdate = new FormData();
     albumDataToUpdate.append('albTitle', albTitle);
@@ -82,7 +80,6 @@ const UpdateAlbum = () => {
     albumDataToUpdate.append('albRelDate', albRelDate);
     albumDataToUpdate.append('albType', albType);
     albumDataToUpdate.append('albGenre', albGenre);
-    albumDataToUpdate.append('albColor', albColor);
 
     try {
       await axios.put(`http://localhost:8800/album/${albID}`, albumDataToUpdate);
@@ -114,7 +111,6 @@ const UpdateAlbum = () => {
             <option value="Digital Single">Digital Single</option>
         </select>
         <input type="text" placeholder="Album Genre" value={albumData.albGenre} onChange={handleChange} name="albGenre" />
-        <input type="text" placeholder="Album Color" value={albumData.albColor} onChange={handleChange} name="albColor" />
         <button type="submit">Update</button>
       </form>
     </div>

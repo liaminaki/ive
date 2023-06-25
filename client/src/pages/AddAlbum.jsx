@@ -14,7 +14,6 @@ const AddAlbum = () => {
         albRelDate: null,
         albType: albType,
         albGenre: '',
-        albColor: '',
       });
     
       const handleChange = (e) => {
@@ -37,7 +36,7 @@ const AddAlbum = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
     
-        const { albTitle, albPhoto, albLanguage, albRelDate, albLength, albType, albNoOfSongs, albGenre, albColor} = albumData;
+        const { albTitle, albPhoto, albLanguage, albRelDate, albLength, albType, albNoOfSongs, albGenre} = albumData;
     
         const albumDataToAdd = new FormData();
         albumDataToAdd.append("albTitle", albTitle);
@@ -46,7 +45,6 @@ const AddAlbum = () => {
         albumDataToAdd.append("albRelDate", albRelDate);
         albumDataToAdd.append("albType", albType);
         albumDataToAdd.append("albGenre", albGenre);
-        albumDataToAdd.append("albColor", albColor);
     
         try {
           await axios.post("http://localhost:8800/album", albumDataToAdd);
@@ -80,7 +78,6 @@ const AddAlbum = () => {
                 </select> */}
                 {/* <input type="number" placeholder="Number of Songs" onChange={handleChange} name="albNoOfSongs" /> */}
                 <input type="text" placeholder="Album Genre" value={albumData.albGenre} onChange={handleChange} name="albGenre" />
-                <input type="text" placeholder="Album Color" value={albumData.albColor} onChange={handleChange} name="albColor" />
                 <button type="submit">Add</button>
           </form>
         </div>

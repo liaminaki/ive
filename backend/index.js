@@ -51,10 +51,9 @@ app.post("/album", upload.single('albPhoto'), (req,res)=>{
                     req.body.albLanguage,
                     req.body.albRelDate,
                     req.body.albType,
-                    req.body.albGenre,
-                    req.body.albColor];
+                    req.body.albGenre,];
     
-    const q = "INSERT INTO album (`albTitle`, `albPhoto`, `albLanguage`, `albRelDate`, `albType`, `albGenre`, `albColor`) VALUES (?)";
+    const q = "INSERT INTO album (`albTitle`, `albPhoto`, `albLanguage`, `albRelDate`, `albType`, `albGenre`) VALUES (?)";
     
     db.query(q,[values],(err, data)=>{
         if(err) return res.json(err);
@@ -128,10 +127,9 @@ app.put("/album/:albID", upload.single('albPhoto'), (req, res) => {
       req.body.albRelDate,
       req.body.albType,
       req.body.albGenre,
-      req.body.albColor,
     ];
   
-    const q = "UPDATE album SET `albTitle` = ?, `albPhoto` = IFNULL(?, `albPhoto`), `albLanguage` = ?, `albRelDate` = ?, `albType` = ?, `albGenre` = ?, `albColor` = ? WHERE `albID` = ?";
+    const q = "UPDATE album SET `albTitle` = ?, `albPhoto` = IFNULL(?, `albPhoto`), `albLanguage` = ?, `albRelDate` = ?, `albType` = ?, `albGenre` = ? WHERE `albID` = ?";
   
     db.query(q, [...values, albID], (err, data) => {
       if (err) {
@@ -145,7 +143,7 @@ app.put("/album/:albID", upload.single('albPhoto'), (req, res) => {
 app.get("/album/albType/:albID", (req, res) => {
     const albID = req.params.albID;
   
-    const q = "SELECT albTitle, albLanguage, albRelDate, albType, albPhoto, albGenre, albColor FROM album WHERE albID = ?";
+    const q = "SELECT albTitle, albLanguage, albRelDate, albType, albPhoto, albGenre FROM album WHERE albID = ?";
   
     db.query(q, [albID], (err, data) => {
       if (err) {
