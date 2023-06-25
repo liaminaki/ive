@@ -3,14 +3,14 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Discography = () => {
-  const [mediaTypes, setMediaTypes] = useState([]);
+  const [albumTypes, setAlbumTypes] = useState([]);
   const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
-    const fetchMediaTypes = async () => {
+    const fetchAlbumTypes = async () => {
       try {
-        const res = await axios.get('http://localhost:8800/mediaTypes');
-        setMediaTypes(res.data);
+        const res = await axios.get('http://localhost:8800/albumTypes');
+        setAlbumTypes(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -25,7 +25,7 @@ const Discography = () => {
       }
     };
 
-    fetchMediaTypes();
+    fetchAlbumTypes();
     fetchAllAlbums();
   }, []);
 
@@ -35,27 +35,27 @@ const Discography = () => {
   return (
     <div>
       <h1>Discography</h1>
-      <div className="media-type">
-        {mediaTypes.map((aMediaType) => {
+      <div className="album-type">
+        {albumTypes.map((anAlbumType) => {
           
-          if (aMediaType.mediaType !== 'All Songs') {
-            const filteredAlbums = filterAlbumsByType(aMediaType.mediaType);
+          if (anAlbumType.albType !== 'All Songs') {
+            const filteredAlbums = filterAlbumsByType(anAlbumType.albType);
             const limitedAlbums = limitAlbums(filteredAlbums, 3);
 
             return (
-              <div key={aMediaType.mediaType}>
-                <Link to={`/discography/${aMediaType.mediaType}`}><h2>{aMediaType.mediaType}</h2></Link>
+              <div key={anAlbumType.albType}>
+                <Link to={`/discography/${anAlbumType.albType}`}><h2>{anAlbumType.albType}</h2></Link>
                 {limitedAlbums.map((album) => (
                   <div className="album" key={album.albID}>
-                    <Link to={`/discography/${aMediaType.mediaType}/${album.albID}/${album.albTitle}`}>{album.albTitle}</Link>
+                    <Link to={`/discography/${anAlbumType.mediaType}/${album.albID}/${album.albTitle}`}>{album.albTitle}</Link>
                   </div>
                 ))}
               </div>
             );
           } else {
             return (
-                <div key={aMediaType.mediaType}>
-                <Link to={`/discography/all-songs`}><h2>{aMediaType.mediaType}</h2></Link>
+                <div key={anAlbumType.albType}>
+                <Link to={`/discography/all-songs`}><h2>{anAlbumType.albType}</h2></Link>
                 </div>
             ); 
           }

@@ -162,8 +162,8 @@ app.get("/album/albType/:albID", (req, res) => {
   });
 
 // Get all media types
-app.get("/mediaTypes", (req, res) => {
-    const q = "SELECT mediaType FROM mediaTypes ORDER BY mediaType DESC";
+app.get("/albumTypes", (req, res) => {
+    const q = "SELECT albType FROM albumTypes ORDER BY albType DESC";
     db.query(q, (err, data) => {
       if (err) return res.json(err);
       return res.json(data);
