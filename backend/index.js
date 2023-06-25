@@ -338,6 +338,21 @@ app.get("/albumNumberOfSongs/:albID", (req, res) => {
     });
 });
 
+// Get album release year
+app.get("/albumRelYear/:albID", (req, res) => {
+    const albID = req.params.albID;
+    const q = "SELECT YEAR(albRelDate) AS albRelYear FROM album WHERE albID = ?";
+  
+    db.query(q, [albID], (err, data) => {
+      if (err) {
+        return res.json(err);
+      }
+  
+      const albRelYear = data[0].albRelYear;
+      return res.json(albRelYear);
+    });
+});
+
 app.listen(8800, ()=>{
     console.log("Connected to backend!")
 })
