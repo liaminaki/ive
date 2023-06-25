@@ -172,8 +172,9 @@ app.get("/albumTypes", (req, res) => {
 app.get("/album/albType/:albTitle/songs", (req, res) => {
     const albTitle = req.params.albTitle;
   
-    const q = "SELECT * FROM song WHERE albID in (SELECT albID FROM album WHERE albTitle = ?)";
-  
+    const q =   "SELECT * FROM song WHERE albID in (SELECT albID FROM album \
+                WHERE albTitle = ?) ORDER BY sOrder";
+
     db.query(q, [albTitle], (err, data) => {
       if (err) {
         return res.status(500).json(err);
@@ -369,6 +370,29 @@ app.get("/allSongs/:albType", (req, res) => {
             return res.status(500).json(err);
           }
           return res.json(data);
+    });
+});
+
+// Get album photo
+app.get("/albumPhoto/:albID", (req, res) => {
+    const albID = req.params.albID
+    const q = "SELECT albPhoto AS albumPhoto FROM album WHERE albID = ?";
+    db.query(q, [albID] ,(err, data) => {
+      if (err) return res.json(err);
+      
+      const albumPhoto = data[0].albumPhoto;
+      return res.json(albumPhoto);
+        
+    });
+});
+
+// Get all members except member with given mID
+app.get("/membersExc/:mID", (req, res) => {
+    const mID = req.params.mID
+    const q = "SELECT * FROM members WHERE mID != ?"; // Sort list from latest to oldest
+    db.query(q, [mID], (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
     });
 });
 

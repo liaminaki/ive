@@ -124,7 +124,16 @@ const Song = () => {
                     <button className='edit' onClick={handleEditClick}>Edit</button>
                     {song.map((song)=>(
                         <div className="song" key={song.sID}>
-                            <p>{song.sTitle}</p>                 
+                            <span>{song.sOrder} </span> 
+                            <span>{song.sTitle} </span>
+                            <span>{song.sLengthInHours ? `${song.sLengthInMinutes}:` : ""}</span> 
+                            <span>{(song.sLengthInHours && song.sLengthInMinutes) ? `${song.sLengthInMinutes.toString().padStart(2, '0')}:` 
+                                    : song.sLengthInMinutes ? `${song.sLengthInMinutes}:`
+                                    : (!song.sLengthInHours && !song.sLengthInMinutes && song.sLengthInSeconds) ? "0:" 
+                                    : !song.sLengthInSeconds ? ""
+                                    : "00:"}
+                            </span>
+                            <span>{(song.sLengthInHours || song.sLengthInMinutes || song.sLengthInSeconds) ? song.sLengthInSeconds.toString().padStart(2, '0') : "N/A"}</span>                 
                         </div>
                     ))}
                     </div>

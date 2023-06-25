@@ -4,31 +4,50 @@ import { useParams, Link } from 'react-router-dom'
 
 const Member = () => {
     const { mID } = useParams()
-    const [memberData, setMemberData] = useState([])
+    const [member, setMemberData] = useState([])
+    const [membersExcOne, setMembersExcOne] = useState([])
 
     // Run for every render
     useEffect(() => {
         
-        const fetchAllMemberData = async () => {
+        const fetchMemberData = async () => {
             try{
                 const res = await axios.get(`http://localhost:8800/member/${mID}`)
                 console.log(res)
                 setMemberData(res.data);
-                console.log(memberData)
+                console.log(member)
             } catch(err){
                 console.log(err)
             }
         }
-        fetchAllMemberData()
+
+        const fetchMembersExcOne = async () => {
+            try{
+                const res = await axios.get(`http://localhost:8800/membersExc/${mID}`)
+                console.log(res)
+                setMembersExcOne(res.data);
+            } catch(err){
+                console.log(err)
+            }
+        }
+
+        fetchMembersExcOne()
+        fetchMemberData()
     },[mID])
   
   return (
     <div>
         <h1>HI</h1>
-        <h1>{memberData.mStageName}</h1>
-        <img src={`http://localhost:8800/img/${memberData.mPhoto}`} width="100px" alt="Preview" />
-        <p>Birth Name: {memberData.mBirthName}</p>
-        <p>English Name: {memberData.mEnglishName}</p>
+        <h1>{member.mStageName}</h1>
+        <img src={`http://localhost:8800/img/${member.mPhoto}`} width="100px" alt="Preview" />
+        <p>Birth Name: {member.mBirthName}</p>
+        <p>English Name: {member.mEnglishName}</p>
+
+        {membersExcOne.map((member)=>(
+            <div className="members" key={member.mID}>
+            <Link to={`/profile/${member.mID}/${member.mStageName}`}><img src={`http://localhost:8800/img/${member.mPhoto}`} width="100px" alt="Preview" /></Link>
+            </div>
+        ))}
     </div>
     
   )
