@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios' // HTTP client use to communicate with backend
 import { useParams, Link } from 'react-router-dom'
+import "../styles/About.css";
 
 const About = () => {
     const [group, setGroup] = useState([])
@@ -33,19 +34,22 @@ const About = () => {
     },[])
   
   return (
-    <div>
-        <h1>{group.gName}</h1>
-        <img src={`http://localhost:8800/img/${group.gPhoto}`} width="100px" alt="Preview" />
-        <p>{group.gDescription}</p>
-        <p>Fandom Name: {group.gFandomName}</p>
-        
-        <p>Official Accounts</p>
-        {socials.map((social)=>(
-            <div className="socials" key={social.socID}>
-            <span>{social.siteName}: </span>
-            <Link to={`/`}>{social.userName}</Link>
-            </div>
-        ))}
+    <div className="About">
+        {/* <img src={`http://localhost:8800/img/${group.gPhoto}`} width="100px" alt="Preview" /> */}
+        <div className="Logo-About"></div>
+        <div className="About-text">
+            <div>{group.gDescription}</div>
+            <p>Fandom Name: {group.gFandomName}</p>
+            
+            <p>Official Accounts</p>
+            {socials.map((social)=>(
+                <div className="Socials" key={social.socID}>
+                <span>{social.siteName}: </span>
+                <Link to={`/`}>{social.userName}</Link>
+                </div>
+            ))}
+        </div>
+
     </div>
     
   )

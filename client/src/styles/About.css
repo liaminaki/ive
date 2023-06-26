@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
+
+.About-text {
+    color: #000;
+    text-align: center;
+    font-size: 2vw;
+    font-family: 'Gothic A1', sans-serif;
+}
+
+.Aboutpage-container {
+    position:absolute;
+    display: flex;
+    width: 100%;
+    height: 200vh;
+    left: 0;
+    flex-wrap: nowrap;
+}
+
+.GroupPhoto-About {
+    position: absolute;
+    display: flex;
+    width: 60%;
+    height: 98vh;
+    left: 21.0%;
+    top: 10%;
+  
+    border: 1px;
+    background-image: url("../../public/img/ivePhoto.svg");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .Logo-About {
+    position: absolute;
+    display: flex;
+    width: 4%;
+    height: 9vh;
+    left: 50%;
+    top: 61%;
+  
+    border-radius: 17px;
+    background-image: url("../../public/img/iveLogo.svg");
+    background-size: cover;
+    background-position: center;
+    transform: translate(-50%, -50%);
+  }
+  
+
+ .About {
+    position: absolute;
+    /* display: flex; */
+    width: 60%;
+    height: 10vh;
+    color: #000;
+    text-align: center;
+    font-size: 2vw;
+    font-family: 'Gothic A1', sans-serif;
+  }
+  
+  .Intro-About {
+    top: 67%;
+    left: 22%;
+    transform: translate(0, -50%);
+  }
