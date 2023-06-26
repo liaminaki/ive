@@ -51,9 +51,10 @@ app.post("/album", upload.single('albPhoto'), (req,res)=>{
                     req.body.albLanguage,
                     req.body.albRelDate,
                     req.body.albType,
-                    req.body.albGenre,];
+                    req.body.albGenre,
+                    1];
     
-    const q = "INSERT INTO album (`albTitle`, `albPhoto`, `albLanguage`, `albRelDate`, `albType`, `albGenre`) VALUES (?)";
+    const q = "INSERT INTO album (`albTitle`, `albPhoto`, `albLanguage`, `albRelDate`, `albType`, `albGenre`, `gID`) VALUES (?)";
     
     db.query(q,[values],(err, data)=>{
         if(err) return res.json(err);
