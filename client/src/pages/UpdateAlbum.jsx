@@ -8,6 +8,8 @@ const UpdateAlbum = () => {
   const { albTitle } = useParams();
   const navigate = useNavigate();
 
+  const [errorMessage, setErrorMessage] = useState('');
+
   const [albumData, setAlbumData] = useState({
     albTitle: '',
     albPhoto: null,
@@ -73,7 +75,21 @@ const UpdateAlbum = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { albTitle, albPhoto, albLanguage, albRelDate, albLength, albType, albNoOfSongs, albGenre } = albumData;
+    const { albTitle, albPhoto, albLanguage, albRelDate, albType, albGenre } = albumData;
+    
+    const allowedFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+    
+    // Check for incomplete details and unsupported media
+    if (!albTitle || !albPhoto || !albLanguage || !albRelDate || !albGenre) {
+        setErrorMessage('Incomplete details. Make sure to fill up all required information.');
+        return;
+    }
+
+    // Check for unsupported media format
+    if (!allowedFileTypes.includes(albPhoto.type)) {
+        setErrorMessage('Media format not supported. Use png, jpeg, jpg for album photo.');
+        return;
+    }
 
     const albumDataToUpdate = new FormData();
     albumDataToUpdate.append('albTitle', albTitle);

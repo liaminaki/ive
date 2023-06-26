@@ -7,6 +7,8 @@ const UpdateSong= () => {
   const { albID } = useParams();
   const { albTitle } = useParams();
   const { sID } = useParams();
+  const [countSameOrder, setCountSameOrder] = useState();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [songData, setSongData] = useState({
     sOrder: 0, // Integer data type
@@ -20,6 +22,10 @@ const UpdateSong= () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSongData((prevSongData) => ({ ...prevSongData, [name]: value }));
+
+    if (name === 'sOrder') {
+        fetchCountSameOrder(parseInt(value));
+      }
   };
 
   const navigate = useNavigate();
@@ -35,6 +41,16 @@ const UpdateSong= () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (countSameOrder > 1) {
+        setErrorMessage('Track Number already taken');
+        return;
+    }
+
+    if (!songData.sOrder || !songData.sTitle || !songData.sRelDate || (!songData.sLengthInHours && !songData.sLengthInMinutes && !songData.sLengthInSeconds)) {
+        setErrorMessage('Incomplete details. Make sure to fill up required information.');
+        return;
+      }
 
     try {
       await axios.put(`http://localhost:8800/album/albType/albTitle/songs/${sID}`, songData);
@@ -68,8 +84,20 @@ const UpdateSong= () => {
       }
     };
 
+    fetchCountSameOrder();
+
     fetchSongData();
   }, [sID]);
+
+  const fetchCountSameOrder = async (sOrder) => {
+    try {
+      const res = await axios.get(`http://localhost:8800/count/${sOrder}/${albID}`);
+      setCountSameOrder(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
 
   const handleDeleteSong = async (sID) =>{
     try{
@@ -95,7 +123,7 @@ const UpdateSong= () => {
       </form>
       <button className='delete' onClick={()=>handleDeleteSong(sID)}>Delete</button>
       <Link to={`/discography/${albType}/${albID}/${albTitle}`}><button className='cancel'>Cancel</button></Link>
-
+      {errorMessage && <p>Error: {errorMessage}</p>}
     </div>
   );
 };

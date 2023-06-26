@@ -8,6 +8,8 @@ const AddSong = () => {
   const { albTitle } = useParams();
 
   const [albPhoto, setAlbPhoto] = useState();
+  const [countSameOrder, setCountSameOrder] = useState();
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [songData, setSongData] = useState({
     sOrder: null, // Integer data type
@@ -31,8 +33,19 @@ const AddSong = () => {
         }
     }
 
+    const fetchCountSameOrder = async (sOrder) => {
+        try{
+            const res = await axios.get(`http://localhost:8800/count/${songData.sOrder}/${albID}`)
+            console.log(res)
+            setCountSameOrder(res.data);
+        } catch(err){
+            console.log(err)
+        }
+    }
+
+    fetchCountSameOrder();
     fetchAlbPhoto();
-},[])
+},[songData.sOrder])
 
 
   const handleChange = (e) => {
@@ -44,6 +57,17 @@ const AddSong = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (countSameOrder > 1) {
+        setErrorMessage('Track Number already taken');
+        return;
+    }
+
+    if (!songData.sOrder || !songData.sTitle || !songData.sRelDate || (!songData.sLengthInHours && !songData.sLengthInMinutes && !songData.sLengthInSeconds)) {
+        setErrorMessage('Incomplete details. Make sure to fill up required information.');
+        return;
+      }
+  
 
     try {
       await axios.post("http://localhost:8800/album/albType/albTitle/songs/", songData);
@@ -67,7 +91,9 @@ const AddSong = () => {
         <button type="submit">Add</button>
       </form>
       <Link to={`/discography/${albType}/${albID}/${albTitle}`}><button className='cancel'>Cancel</button></Link>
+      {errorMessage && <p>Error: {errorMessage}</p>}
     </div>
+    
   );
 };
 

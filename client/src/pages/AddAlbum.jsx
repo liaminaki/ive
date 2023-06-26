@@ -4,7 +4,8 @@ import axios from 'axios'
 
 const AddAlbum = () => {
     const { albType } = useParams(); // Retrieve the album type from the URL parameters
-
+    
+    const [errorMessage, setErrorMessage] = useState('');
 
     const [albumData, setAlbumData] = useState({
         albTitle: "",
@@ -36,7 +37,20 @@ const AddAlbum = () => {
       const handleSubmit = async (e) => {
         e.preventDefault();
     
-        const { albTitle, albPhoto, albLanguage, albRelDate, albLength, albType, albNoOfSongs, albGenre} = albumData;
+        const { albTitle, albPhoto, albLanguage, albRelDate, albType, albGenre} = albumData;
+        const allowedFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+        
+        // Check for incomplete details and unsupported media
+        if (!albTitle || !albPhoto || !albLanguage || !albRelDate || !albGenre) {
+            setErrorMessage('Incomplete details. Make sure to fill up all required information.');
+            return;
+        }
+  
+        // Check for unsupported media format
+        if (!allowedFileTypes.includes(albPhoto.type)) {
+            setErrorMessage('Media format not supported. Use png, jpeg, jpg for album photo.');
+            return;
+        }
     
         const albumDataToAdd = new FormData();
         albumDataToAdd.append("albTitle", albTitle);
@@ -80,6 +94,7 @@ const AddAlbum = () => {
                 <input type="text" placeholder="Album Genre" value={albumData.albGenre} onChange={handleChange} name="albGenre" />
                 <button type="submit">Add</button>
           </form>
+          {errorMessage && <p>Error: {errorMessage}</p>}
         </div>
       );
 }

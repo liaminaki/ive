@@ -406,6 +406,21 @@ app.get("/socials", (req, res) => {
     });
 });
 
+// Get number of songs with the same sOrder in the same albID
+app.get("/count/:sOrder/:albID", (req, res) => {
+    const sOrder = req.params.sOrder
+    const albID = req.params.albID
+
+    const q = "SELECT COUNT(*) AS count FROM song WHERE sOrder = ? AND albID = ?";
+    db.query(q, [sOrder, albID] ,(err, data) => {
+      if (err) return res.json(err);
+      
+      const count = data[0].count;
+      return res.json(count);
+        
+    });
+});
+
 app.listen(8800, ()=>{
     console.log("Connected to backend!")
 })
