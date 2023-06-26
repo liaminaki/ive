@@ -10,9 +10,10 @@ const Song = () => {
 
     const [song, setSong] = useState([])
     const [totalLengthInSeconds, setTotalLengthInSeconds] = useState(0);
-    const [numberOfSongs, setNumberOfSongs] = useState(0);
+    const [numberOfSongs, setNumberOfSongs] = useState(0)
     const [albRelYear, setAlbRelYear] = useState();
     const [editMode, setEditMode] = useState(false);
+    const [albPhoto, setAlbPhoto] = useState();
 
     const handleEditClick = () => {
         setEditMode(true);
@@ -61,6 +62,17 @@ const Song = () => {
             }
         };
 
+        const fetchAlbPhoto = async () => {
+            try{
+                const res = await axios.get(`http://localhost:8800/albumPhoto/${albID}`)
+                console.log(res)
+                setAlbPhoto(res.data);
+            } catch(err){
+                console.log(err)
+            }
+        }
+    
+        fetchAlbPhoto();
         fetchSong()
         fetchTotalLengthInSeconds()
         fetchNumberOfSongs();
@@ -97,6 +109,7 @@ const Song = () => {
             <h1>Songs</h1>
             <div className="song">
                 <h2>{albTitle}</h2>
+                <img src={`http://localhost:8800/img/album-photo/${albPhoto}`} width="100px" alt="Preview" />
                 <p>{albRelYear}</p>
                 <p>{numberOfSongs} {numberOfSongs === 1 ? 'song' : 'songs'}</p>
                 <p>{albumLength.hours !== 0 && `${albumLength.hours} hr `}

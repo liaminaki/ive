@@ -396,6 +396,15 @@ app.get("/membersExc/:mID", (req, res) => {
     });
 });
 
+// Get all socials of the group 
+app.get("/socials", (req, res) => {
+    const q = "SELECT * FROM socials"; // Sort list from latest to oldest
+    db.query(q, (err, data) => {
+      if (err) return res.json(err);
+      return res.json(data);
+    });
+});
+
 app.listen(8800, ()=>{
     console.log("Connected to backend!")
 })
