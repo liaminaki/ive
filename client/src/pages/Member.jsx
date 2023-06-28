@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios' // HTTP client use to communicate with backend
 import { useParams, Link } from 'react-router-dom'
+import "../styles/Member.css"
 
 const Member = () => {
     const { mID } = useParams()
@@ -37,17 +38,30 @@ const Member = () => {
   
   return (
     <div>
-        <h1>HI</h1>
-        <h1>{member.mStageName}</h1>
-        <img src={`http://localhost:8800/img/${member.mPhoto}`} width="100px" alt="Preview" />
-        <p>Birth Name: {member.mBirthName}</p>
-        <p>English Name: {member.mEnglishName}</p>
-
-        {membersExcOne.map((member)=>(
-            <div className="members" key={member.mID}>
-            <Link to={`/profile/${member.mID}/${member.mStageName}`}><img src={`http://localhost:8800/img/${member.mPhoto}`} width="100px" alt="Preview" /></Link>
+        <div className='spacer'></div>
+        <div className="a-member">
+            <img src={`../../img/member-photo/${member.mPhoto}`} className="member-photo" width="100px" alt="Preview" />
+            <div className="member-details">
+                <p><span>Birth Name:</span> {member.mBirthName}</p>
+                <p><span>English Name:</span> {member.mEnglishName}</p>
+                <p><span>Position:</span> {member.mPosition}</p>
+                <p><span>Zodiac Sign:</span> {member.mZodiacSign}</p>
+                <p><span>Nationality:</span> {member.mNationality}</p>
+                <p><span>Height:</span> {member.mHeight}</p>
+                <p><span>Weight:</span> {member.mWeight}</p>
+                <p><span>Blood Type:</span> {member.mBloodType}</p>
+                <p><span>MBTI Type:</span> {member.mMBTIType}</p>
             </div>
-        ))}
+        </div>
+        
+        <div className='other-members'>
+            {membersExcOne.map((member)=>(
+                <div className="other-member" key={member.mID}>
+                <Link to={`/profile/${member.mID}/${member.mStageName}`}><img src={`../../img/member-photo/${member.mPhoto}`} alt="Preview" className='other-member-photo' /></Link>
+                </div>
+            ))}
+        </div>
+        
     </div>
     
   )

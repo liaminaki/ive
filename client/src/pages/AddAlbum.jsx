@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
+import "../styles/EditAlbum.css"
 
 const AddAlbum = () => {
     const { albType } = useParams(); // Retrieve the album type from the URL parameters
@@ -10,7 +11,7 @@ const AddAlbum = () => {
     const [albumData, setAlbumData] = useState({
         albTitle: "",
         albPhoto: null,
-        previewAlbPhoto: null,
+        previewAlbPhoto: `http://localhost:8800/img/defaultAlbumPhoto.svg`,
         albLanguage: "",
         albRelDate: null,
         albType: albType,
@@ -40,18 +41,18 @@ const AddAlbum = () => {
         const { albTitle, albPhoto, albLanguage, albRelDate, albType, albGenre} = albumData;
         const allowedFileTypes = ['image/png', 'image/jpeg', 'image/jpg'];
         
+        // Check for unsupported media format
+        if (!allowedFileTypes.includes(albPhoto.type)) {
+                    setErrorMessage('Media format not supported. Try again using png, jpeg, jpg for album photo.');
+                    return;
+                }
+
         // Check for incomplete details and unsupported media
         if (!albTitle || !albPhoto || !albLanguage || !albRelDate || !albGenre) {
-            setErrorMessage('Incomplete details. Make sure to fill up all required information.');
+            setErrorMessage('Incomplete details. Try again.');
             return;
         }
   
-        // Check for unsupported media format
-        if (!allowedFileTypes.includes(albPhoto.type)) {
-            setErrorMessage('Media format not supported. Use png, jpeg, jpg for album photo.');
-            return;
-        }
-    
         const albumDataToAdd = new FormData();
         albumDataToAdd.append("albTitle", albTitle);
         albumDataToAdd.append("albPhoto", albPhoto);
@@ -70,31 +71,34 @@ const AddAlbum = () => {
     
       return (
         <div>
-            <h1>Add new album</h1>
-            <form onSubmit={handleSubmit} action="/discography" encType="multipart/form-data" method="post">
-                <input type="text" placeholder="Album Title" onChange={handleChange} name="albTitle" />
-                <input type="file" onChange={handleChange} name="albPhoto" />
+          <div className='spacer'></div>
+          <h1 className='header'>Add new album</h1>
+          <form onSubmit={handleSubmit} action="/discography" encType="multipart/form-data" method="post">
+            <div className="form-container">
+              <div className="album-photo">
+              <p className='attribute'>Album Photo</p>
                 {albumData.previewAlbPhoto && (
-                <div>
-                    <h2>Preview Album Photo:</h2>
-                    <img src={albumData.previewAlbPhoto} alt="Preview" />
-                </div>
+                  <img src={albumData.previewAlbPhoto} alt="Preview" width="200px" height="200px" />
                 )}
-                <input type="text" placeholder="Album Language" onChange={handleChange} name="albLanguage" />
-                <input type="date" onChange={handleChange} name="albRelDate" />
-                {/* <input type="time" onChange={handleChange} name="albLength" /> */}
-                {/* <select name="albType" onChange={handleChange}>
-                    <option value="">Select Album Type</option>
-                    <option value="single">Single Album</option>
-                    <option value="mini">Mini Album</option>
-                    <option value="studio">Studio Album</option>
-                    <option value="digitalSingle">Digital Single</option>
-                </select> */}
-                {/* <input type="number" placeholder="Number of Songs" onChange={handleChange} name="albNoOfSongs" /> */}
-                <input type="text" placeholder="Album Genre" value={albumData.albGenre} onChange={handleChange} name="albGenre" />
-                <button type="submit">Add</button>
+                <input type="file" onChange={handleChange} name="albPhoto" />
+              </div>
+              <div className="album-details">
+                <p className='attribute'>Album Title</p>
+                <input type="text" onChange={handleChange} name="albTitle" />
+                <p className='attribute'>Language</p>
+                <input type="text" onChange={handleChange} name="albLanguage" />
+                <p className='attribute'>Genre</p>
+                <input type="text" value={albumData.albGenre} onChange={handleChange} name="albGenre" />
+                <p className='attribute'>Release Date</p>
+                <input type="date" placeholder="Release Date" onChange={handleChange} name="albRelDate" />
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                <div className='button-container'>
+                  <button type="submit">Add</button>
+                  <button className="cancel-button"><Link to={`/discography/${albType}`} style={{ textDecoration: 'none', color: 'black' }}>Cancel</Link></button>
+                </div>
+              </div>
+            </div>
           </form>
-          {errorMessage && <p>Error: {errorMessage}</p>}
         </div>
       );
 }

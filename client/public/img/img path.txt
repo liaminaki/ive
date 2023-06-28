@@ -1,0 +1,2 @@
+img folder
+path: final\client\public\img

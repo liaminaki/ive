@@ -12,16 +12,13 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Member from './pages/Member';
 import About from './pages/About';
+import Navbar from './pages/Navbar';
 
 function App() {
   return (
     <div className="App">
       
       <BrowserRouter>
-            <p><Link to={"/"}>Home </Link></p>
-            <p><Link to={"/profile"}>Profile </Link></p>
-            <p><Link to={"/discography"}>Discography </Link></p>
-            <p><Link to={"/about"}>About </Link></p>
         <Routes>
         
           <Route path="/" element={<Home/>}/>
@@ -50,6 +47,7 @@ function App() {
             </Route>
           </Route>
         </Routes>
+        <Navbar/>
       </BrowserRouter>
     </div>
   );

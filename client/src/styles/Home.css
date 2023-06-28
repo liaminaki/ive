@@ -1,0 +1,11 @@
+.Homepage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin-top: 105vh;
+  }
+  
+  .Homepage img {
+    max-width: 100%;
+  }

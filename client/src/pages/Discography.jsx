@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import"../styles/Discography.css";
 
 const Discography = () => {
   const [albumTypes, setAlbumTypes] = useState([]);
@@ -34,33 +35,16 @@ const Discography = () => {
 
   return (
     <div>
-      <h1>Discography</h1>
-      <div className="album-type">
-        {albumTypes.map((anAlbumType) => {
-          
-          if (anAlbumType.albType !== 'All Songs') {
-            const filteredAlbums = filterAlbumsByType(anAlbumType.albType);
-            const limitedAlbums = limitAlbums(filteredAlbums, 3);
-
-            return (
-              <div key={anAlbumType.albType}>
-                <Link to={`/discography/${anAlbumType.albType}`}><h2>{anAlbumType.albType}</h2></Link>
-                {limitedAlbums.map((album) => (
-                  <div className="album" key={album.albID}>
-                    <Link to={`/discography/${anAlbumType.albType}/${album.albID}/${album.albTitle}`}>{album.albTitle}</Link>
-                  </div>
-                ))}
-              </div>
-            );
-          } else {
-            return (
-                <div key={anAlbumType.albType}>
-                <Link to={`/discography/all-songs`}><h2>{anAlbumType.albType}</h2></Link>
-                </div>
-            ); 
-          }
-        })}
-      </div>
+        <div className='spacer'></div>
+        <div className='image-container'>
+        <img class="image-wrapper1"src="img/Discography.png"></img>
+        <Link to={`/discography/Studio%20Album`}><img class="image-wrapper2" src="img/StudioAlbum.png"></img> </Link>
+        <Link to={`/discography/Single%20Album`}><img class="image-wrapper3"src="img/SingleAlbum.png"></img> </Link>
+        <Link to={`/discography/Mini%20Album`}><img class="image-wrapper4"src="img/MiniAlbum.png"></img> </Link>
+        <Link to={`/discography/Digital%20Single`}><img class="image-wrapper5"src="img/DigitalSingle.png"></img> </Link>
+        <Link to={`/discography/all-songs`}><img class="image-wrapper6"src="img/AllSongs.png"></img> </Link>
+        </div>
+           
     </div>
   );
 };

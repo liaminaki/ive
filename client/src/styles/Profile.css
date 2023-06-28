@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.header {
+    color: #000;
+    text-align: center;
+    font-size: 100px;
+    font-family: 'Bebas Neue', sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.allMembers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    margin-bottom: 100px;
+  }
+  
+  .allMembers-photo {
+    width: 200px;
+  }
+  
+  .allMembers-photos {
+    flex: 0 0 33%;
+    padding: 10px;
+    box-sizing: border-box;
+  }

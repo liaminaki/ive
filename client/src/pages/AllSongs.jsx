@@ -43,7 +43,8 @@ const AllSongs = () => {
   
     return (
         <div>
-            <h1>Songs</h1>
+            <div className='spacer'></div>
+            <h1 className='header'>Songs</h1>
 
             <button className="filter-button" onClick={() => handleFilterClick('')}>All</button>
             <button className="filter-button" onClick={() => handleFilterClick('Studio Album')}>Studio Album</button>
@@ -57,9 +58,9 @@ const AllSongs = () => {
                         {(selectedAlbumType ? songsByAlbumType : null).map((song, index)=>(
                             <div className="song" key={song.sID}>
                                 <p>
-                                    <span>{index + 1} </span>
-                                    <span>{song.sTitle} </span>
-                                    <span><Link to={`/discography/${song.albType}/${song.albID}/${song.albTitle}`}>{song.albTitle} </Link></span>
+                                    <span>{index + 1} |</span>
+                                    <span> {song.sTitle} |</span>
+                                    <span><Link to={`/discography/${song.albType}/${song.albID}/${song.albTitle}`}> {song.albTitle} |</Link></span>
                                     <span>{song.sLengthInHours ? `${song.sLengthInMinutes}:` : ""}</span> 
                                     <span>{(song.sLengthInHours && song.sLengthInMinutes) ? `${song.sLengthInMinutes.toString().padStart(2, '0')}:` 
                                             : song.sLengthInMinutes ? `${song.sLengthInMinutes}:`
@@ -78,9 +79,9 @@ const AllSongs = () => {
                         {(allSongs ? allSongs : null).map((song, index)=>(
                             <div className="song" key={song.sID}>
                                 <p>
-                                    <span>{index + 1} </span>
-                                    <span><Link to={`/discography/${song.albType}/${song.albID}/${song.albTitle}`}>{song.albTitle} </Link></span>
-                                    <span>{song.albTitle} </span>
+                                    <span>{index + 1} |</span>
+                                    <span> {song.sTitle} |</span>
+                                    <span><Link to={`/discography/${song.albType}/${song.albID}/${song.albTitle}`}> {song.albTitle} |</Link></span>
                                     <span>{song.sLengthInHours ? `${song.sLengthInMinutes}:` : ""}</span> 
                                     <span>{(song.sLengthInHours && song.sLengthInMinutes) ? `${song.sLengthInMinutes.toString().padStart(2, '0')}:` 
                                             : song.sLengthInMinutes ? `${song.sLengthInMinutes}:`

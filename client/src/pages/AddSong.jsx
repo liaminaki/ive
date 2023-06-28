@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import "../styles/EditAlbum.css"
 
 const AddSong = () => {
   const { albType } = useParams();
@@ -79,19 +80,44 @@ const AddSong = () => {
 
   return (
     <div>
-      <h1>Add new song in {albTitle}</h1>
-      <img src={`http://localhost:8800/img/album-photo/${albPhoto}`} width="100px" alt="Preview" />
+      <div className='spacer'></div>
+      <h1 className='header'>Add new song</h1>
       <form onSubmit={handleSubmit}>
-        <input type="number" placeholder="Song Order" onChange={handleChange} name="sOrder" />
-        <input type="text" placeholder="Song Title" onChange={handleChange} name="sTitle" />
-        <input type="number" placeholder="Length (hours)" onChange={handleChange} name="sLengthInHours" />
-        <input type="number" placeholder="Length (minutes)" onChange={handleChange} name="sLengthInMinutes" />
-        <input type="number" placeholder="Length (seconds)" onChange={handleChange} name="sLengthInSeconds" />
-        <input type="date" onChange={handleChange} name="sRelDate" />
-        <button type="submit">Add</button>
+      <div className="form-container">
+            <div className="album-photo">
+                <p className='attribute'>Album Photo</p>
+                <img src={`http://localhost:8800/img/album-photo/${albPhoto}`} width="200px" heigh="200px" alt="Preview" />
+            </div>
+            
+            <div className="album-details">
+                <p className='attribute'>Track Number</p>
+                <input type="number" onChange={handleChange} name="sOrder" />
+                <p className='attribute'>Song Title</p>
+                <input type="text" onChange={handleChange} name="sTitle" />
+                <div className='length'>
+                    <div className='length-time'>
+                    <p className='attribute'>Hours</p>
+                    <input type="number" onChange={handleChange} name="sLengthInHours" />
+                    </div>
+                    <div className='length-time'>
+                    <p className='attribute'>Minutes</p>
+                    <input type="number" onChange={handleChange} name="sLengthInMinutes" />
+                    </div>
+                    <div className='length-time'>
+                    <p className='attribute'>Seconds</p>
+                    <input type="number" onChange={handleChange} name="sLengthInSeconds" />
+                    </div>
+                </div>
+            <p className='attribute'>Release Date</p>
+            <input type="date" onChange={handleChange} name="sRelDate" />
+                {errorMessage && <p>Error: {errorMessage}</p>}
+                <div className='button-container'>
+                    <button type="submit">Add</button>
+                    <Link to={`/discography/${albType}/${albID}/${albTitle}`}><button className='cancel-button'>Cancel</button></Link>
+                </div>
+            </div>
+        </div>
       </form>
-      <Link to={`/discography/${albType}/${albID}/${albTitle}`}><button className='cancel'>Cancel</button></Link>
-      {errorMessage && <p>Error: {errorMessage}</p>}
     </div>
     
   );

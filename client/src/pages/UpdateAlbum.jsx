@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import "../styles/EditAlbum.css"
 
 const UpdateAlbum = () => {
   const { albID } = useParams(); // Retrieve the album ID from the URL parameters
@@ -81,13 +82,13 @@ const UpdateAlbum = () => {
     
     // Check for incomplete details and unsupported media
     if (!albTitle || !albPhoto || !albLanguage || !albRelDate || !albGenre) {
-        setErrorMessage('Incomplete details. Make sure to fill up all required information.');
+        setErrorMessage('Incomplete details. Try again.');
         return;
     }
 
     // Check for unsupported media format
     if (!allowedFileTypes.includes(albPhoto.type)) {
-        setErrorMessage('Media format not supported. Use png, jpeg, jpg for album photo.');
+        setErrorMessage('Media format not supported. Try again using png, jpeg, jpg for album photo.');
         return;
     }
 
@@ -119,30 +120,48 @@ const UpdateAlbum = () => {
 
   return (
     <div>
-      <h1>Update Album</h1>
+     <div className='spacer'></div>
+      <h1 className='header'>Update Album</h1>
       <form onSubmit={handleSubmit} action={`/discography/${albID}`} encType="multipart/form-data" method="put">
-        <input type="text" placeholder="Album Title" value={albumData.albTitle} onChange={handleChange} name="albTitle" />
-        <input type="file" onChange={handleChange} name="albPhoto" />
-        {albumData.previewAlbPhoto && (
-          <div>
-            <h2>Preview Album Photo:</h2>
-            <img src={albumData.previewAlbPhoto} alt="Preview" />
-          </div>
-        )}
-        <input type="text" placeholder="Album Language" value={albumData.albLanguage} onChange={handleChange} name="albLanguage" />
-        <input type="date" value={albumData.albRelDate} onChange={handleChange} name="albRelDate"/>
-        <select name="albType" value={albumData.albType} onChange={handleChange}>
-            <option value="">Select Album Type</option>
-            <option value="Studio Album">Studio Album</option>
-            <option value="Single Album">Single Album</option>
-            <option value="Mini Album">Mini Album</option>
-            <option value="Digital Single">Digital Single</option>
-        </select>
-        <input type="text" placeholder="Album Genre" value={albumData.albGenre} onChange={handleChange} name="albGenre" />
-        <button type="submit">Update</button>
+        
+        <div className="form-container">
+            <div className="album-photo">
+                <p className='attribute'>Album Photo</p>
+                {albumData.previewAlbPhoto && (
+                <div>
+                    <img src={albumData.previewAlbPhoto} alt="Preview" width="200px" height="200px"/>
+                </div>
+                )}
+                <input type="file" onChange={handleChange} name="albPhoto" />
+            </div>
+
+            <div className="album-details">
+                <p className='attribute'>Album Title</p>
+                <input type="text" value={albumData.albTitle} onChange={handleChange} name="albTitle" />
+                <p className='attribute'>Language</p>
+                <input type="text" value={albumData.albLanguage} onChange={handleChange} name="albLanguage" />
+                <p className='attribute'>Genre</p>
+                <input type="text" value={albumData.albGenre} onChange={handleChange} name="albGenre" />
+                <p className='attribute'>Release Date</p>
+                <input type="date" value={albumData.albRelDate} onChange={handleChange} name="albRelDate"/>
+                <div className="select-container">
+                <select name="albType" value={albumData.albType} onChange={handleChange}>
+                    <option value="">Select Album Type</option>
+                    <option value="Studio Album">Studio Album</option>
+                    <option value="Single Album">Single Album</option>
+                    <option value="Mini Album">Mini Album</option>
+                    <option value="Digital Single">Digital Single</option>
+                </select>
+                </div>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                <div className='button-container'>
+                    <button type="submit">Update</button>
+                    <button className='delete-button' onClick={()=>handleDeleteAlbum(albID)}>Delete</button>  
+                    <Link to={`/discography/${albType}/${albID}/${albTitle}`}><button className='cancel-button'>Cancel</button></Link>
+                </div>
+            </div>
+        </div>
       </form>
-      <button className='delete' onClick={()=>handleDeleteAlbum(albID)}>Delete</button>  
-      <Link to={`/discography/${albType}/${albID}/${albTitle}`}><button className='cancel'>Cancel</button></Link>
     </div>
 
   );

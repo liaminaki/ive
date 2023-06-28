@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
+
+.navbar-container {
+  position: absolute;
+  display: flex;
+  left: 0;
+  height: 4%; 
+  width: 100%;
+  flex-wrap: nowrap;
+  top:8%;
+}
+
+.home-container,
+.profile-container,
+.discography-container,
+.about-container {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  color: #000;
+  text-align: center;
+  font-size: 1.5vw;
+  font-family: 'Eagle Lake', cursive;
+  text-decoration: none;
+}
+
+.home-container {
+  width: 10%;
+  left: 28vw;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.profile-container {
+  width: 10%;
+  left: 38vw;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.navbar-logo {
+  position: absolute;
+  display: flex;
+  width: 4%;
+  height: 4.5vw;
+  left: 46.9vw;
+  top: 20%;
+  transform: translateY(-50%);
+
+  border-radius: 17px;
+  background-image: url("../../public/img/iveLogo.svg");
+  background-size: cover;
+  background-position: center;
+}
+
+.discography-container {
+  width: 12%;
+  left: 55vw;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.about-container {
+  width: 10%;
+  left: 68vw;
+  top: 50%;
+  transform: translateY(-50%);
+}

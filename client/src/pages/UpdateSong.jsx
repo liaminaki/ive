@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import "../styles/EditAlbum.css"
 
 const UpdateSong= () => {
   const { albType } = useParams();
@@ -9,6 +10,7 @@ const UpdateSong= () => {
   const { sID } = useParams();
   const [countSameOrder, setCountSameOrder] = useState();
   const [errorMessage, setErrorMessage] = useState('');
+  const [albPhoto, setAlbPhoto] = useState();
 
   const [songData, setSongData] = useState({
     sOrder: 0, // Integer data type
@@ -84,8 +86,18 @@ const UpdateSong= () => {
       }
     };
 
-    fetchCountSameOrder();
+    const fetchAlbPhoto = async () => {
+        try{
+            const res = await axios.get(`http://localhost:8800/albumPhoto/${albID}`)
+            console.log(res)
+            setAlbPhoto(res.data);
+        } catch(err){
+            console.log(err)
+        }
+    }
 
+    fetchCountSameOrder();
+    fetchAlbPhoto ()
     fetchSongData();
   }, [sID]);
 
@@ -111,19 +123,48 @@ const UpdateSong= () => {
 
   return (
     <div>
-      <h1>Update song</h1>
+      <div className='spacer'></div>
+      <h1 className='header'>Update song</h1>
       <form onSubmit={handleSubmit}>
-        <input type="number" placeholder="Song Order" value={songData.sOrder} onChange={handleChange} name="sOrder" />
-        <input type="text" placeholder="Song Title" value={songData.sTitle} onChange={handleChange} name="sTitle" />
-        <input type="number" placeholder="Length (hours)" value={songData.sLengthInHours} onChange={handleChange} name="sLengthInHours" />
-        <input type="number" placeholder="Length (minutes)" value={songData.sLengthInMinutes} onChange={handleChange} name="sLengthInMinutes" />
-        <input type="number" placeholder="Length (seconds)" value={songData.sLengthInSeconds} onChange={handleChange} name="sLengthInSeconds" />
-        <input type="date" value={songData.sRelDate} onChange={handleChange} name="sRelDate" />
-        <button type="submit">Update</button>  
+       <div className="form-container">
+            <div className="album-photo">
+            <p className='attribute'>Album Photo</p>
+                <img src={`http://localhost:8800/img/album-photo/${albPhoto}`} width="200px" heigh="200px" alt="Preview" />
+            </div>
+            
+            <div className="album-details">
+                <p className='attribute'>Track Number</p>
+                <input type="number" value={songData.sOrder} onChange={handleChange} name="sOrder" />
+            <p className='attribute'>Song Title</p>
+            <input type="text" value={songData.sTitle} onChange={handleChange} name="sTitle" />
+            <div className='length'>
+                <div className='length-time'>
+                    <p className='attribute'>Hours</p>
+                    <input type="number" value={songData.sLengthInHours} onChange={handleChange} name="sLengthInHours" />
+                </div>
+                <div className='length-time'>
+                    <p className='attribute'>Minutes</p>
+                    <input type="number" value={songData.sLengthInMinutes} onChange={handleChange} name="sLengthInMinutes" />
+                </div>
+                <div className='length-time'>
+                    <p className='attribute'>Seconds</p>
+                    <input type="number" value={songData.sLengthInSeconds} onChange={handleChange} name="sLengthInSeconds" />
+                </div>
+            </div>
+            <p className='attribute'>Release Date</p>
+            <input type="date" value={songData.sRelDate} onChange={handleChange} name="sRelDate" />
+            {errorMessage && <p>Error: {errorMessage}</p>}
+            <div className='button-container'>
+            <button type="submit">Update</button>
+            <button className='delete-button' onClick={()=>handleDeleteSong(sID)}>Delete</button>
+            <Link to={`/discography/${albType}/${albID}/${albTitle}`}><button className='cancel-button'>Cancel</button></Link>
+            </div>
+            </div>
+
+       </div>
+
       </form>
-      <button className='delete' onClick={()=>handleDeleteSong(sID)}>Delete</button>
-      <Link to={`/discography/${albType}/${albID}/${albTitle}`}><button className='cancel'>Cancel</button></Link>
-      {errorMessage && <p>Error: {errorMessage}</p>}
+
     </div>
   );
 };

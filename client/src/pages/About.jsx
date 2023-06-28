@@ -34,10 +34,15 @@ const About = () => {
     },[])
   
   return (
+    
     <div className="About">
-        {/* <img src={`http://localhost:8800/img/${group.gPhoto}`} width="100px" alt="Preview" /> */}
-        <div className="Logo-About"></div>
+        <div className='spacer'></div>
+        
+        <img src="img/groupPhoto.svg" alt='preview' width="1000px"></img>
+        
+            
         <div className="About-text">
+            <img src="img/iveLogo.svg" alt='preview' width="50px" className='logo'></img>
             <div>{group.gDescription}</div>
             <p>Fandom Name: {group.gFandomName}</p>
             
@@ -45,7 +50,7 @@ const About = () => {
             {socials.map((social)=>(
                 <div className="Socials" key={social.socID}>
                 <span>{social.siteName}: </span>
-                <Link to={`/`}>{social.userName}</Link>
+                <a href={social.link} target="_blank" rel="noopener noreferrer">{social.userName}</a>
                 </div>
             ))}
         </div>

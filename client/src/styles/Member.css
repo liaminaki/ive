@@ -1,0 +1,49 @@
+
+.a-member {
+    display: flex;
+    margin: auto;
+    max-width: 790px;
+    margin: 0 auto;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 40px;
+}
+
+.spacer {
+    min-height: 14vh;
+}
+
+.member-photo {
+    height: 500px;
+    width: 20px;
+    flex: 1;
+}
+
+.member-details {
+    flex: 2;
+    color: #000;
+    text-align: center;
+    font-family: 'Gothic A1', sans-serif;
+    text-align: left;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.member-details span {
+    font-weight: bold;
+    color: #831414;
+}
+
+.other-members {
+    display: flex;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.other-member {
+    flex: 1;
+}
+
+.other-member-photo {
+    width: 150px;
+}

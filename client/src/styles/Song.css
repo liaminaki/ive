@@ -1,0 +1,321 @@
+@import url("https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Gothic+A1&family=Montserrat:wght@100&display=swap");
+
+
+.backButton {
+    position:absolute;
+    display: flex;
+    width: 57px;
+    height: 53px;
+    left: 120px;
+    top: 164px;
+  
+    border: 1px;
+    background-image: url("../../public/img/backButton.svg");
+    background-size: cover;
+    background-position: center;
+}
+
+.editButton {
+    position:absolute;
+    display: flex;
+    width: 40px;
+    height: 40px;
+    right: 120px;
+    top: 300px;
+    z-index:100;
+  
+    border: 1px;
+    background-image: url("../../public/img/editButton.svg");
+    background-size: cover;
+    background-position: center;
+}
+
+.albumPhoto {
+    position:relative;
+    z-index: 10;
+    display: flex;
+    width: 400px;
+    height: 400px;
+    left: 120px;
+    top: 120px;
+  
+    border: 1px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0px 11px 25px 20px rgba(0, 0, 0, 0.25);
+}
+
+.albumType {
+    position: relative;
+    display: flex;
+    z-index: 10;
+    width: 500px;
+    height: 35px;
+    top: -100px;
+    left: 560px;
+    text-align: center;
+    color: white;
+    font-family: 'Dela Gothic One';
+    font-size: 24px;
+}
+
+.albumName {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    width: 1000px;
+    height: 120px;
+    top: -210px;
+    left: 555px;
+    text-align: center;
+    color: white;
+    font-family: 'Dela Gothic One';
+    font-size: 90px;
+}
+
+.albumDetails {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    width: 1000px;
+    height: 29px;
+    top: -330px;
+    left: 560px;
+    text-align: center;
+    color: white;
+    font-family: 'Montserrat';
+    font-size: 24px;
+}
+
+.albumGradientBG {
+    position:absolute;
+    z-index: 5;
+    display: flex;
+    width: 100%;
+    height: 583.519px;
+    left: 0px;
+    top: 218px;
+    transform: rotate(-180deg);
+    flex-shrink: 0;
+
+    background: linear-gradient(180deg, #000 18.23%, #2A2A2A 37.50%, rgba(233, 233, 233, 0.00) 100%);
+    background-size: cover;
+    background-position: center;
+}
+
+.blackBG {
+    position:absolute;
+    display: flex;
+    width: 1519px;
+    height: 1655px;
+    left: 0px;
+    top: 800px;
+    flex-shrink: 0;
+
+    background: #000;
+    background-size: cover;
+    background-position: center;
+}
+
+.startLine {
+    position: relative;
+    display: flex;
+    width: 1320px;
+    height: 1px;
+    left: 99.33px;
+    top: -130px;
+    flex-shrink: 0;
+
+    border: 1px;
+    background-image: url("../../public/img/startLine.svg");
+    color: white;
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+}
+
+.trackNumCategory {
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    width: 17px;
+    height: 29px;
+    top: 800px;
+    left: 144.33px;
+    text-align: center;
+    color: white;
+    font-family: 'Montserrat';
+    font-size: 24px;
+}
+
+
+.titleCategory {
+    position: absolute;
+    display: flex;
+    width: 17px;
+    height: 29px;
+    top: 800px;
+    left: 200px;
+    text-align: center;
+    color: white;
+    font-family: 'Montserrat';
+    font-size: 24px;
+}
+
+
+.timeCategory {
+    position:absolute;
+    display: flex;
+    width: 35px;
+    height: 35px;
+    right: 120px;
+    top: 10px;
+  
+    border: 1px;
+    background-image: url("../../public/img/timeCategory.svg");
+    background-size: cover;
+    background-position: center;
+}
+
+.songs {
+    top: -70px;
+    left: 145px;
+    z-index: 10;
+    position: relative;
+    color: white;
+    display: flex;
+    align-content: center;
+    
+}
+
+.titleno {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+
+}
+
+.trackno {
+    font-family: 'Montserrat';
+    font-size: 32px;
+    flex: 1;
+}
+
+.tracktitle {
+    font-family: 'Gothic A1';
+    font-size: 40px;
+}
+
+.tracklenght {
+    font-family: 'Gothic A1';
+    font-size: 20px;
+}
+
+.delete {
+    width: 45px;
+    height: 40px;
+    border: 1px;
+    background-image: url("../../public/img/removeSongButton.svg");
+}
+
+.update {
+    width: 48px;
+    height: 48px;
+    border: 1px;
+    background-image: url("../../public/img/editSongButton.svg");
+} 
+
+
+.addButton {
+    position: relative;
+    left: 700px;
+    width: 88px;
+    height: 90px;
+    z-index: 100;
+    background-image: url("../../public/img/addSongButton.svg");
+    margin-bottom: 30px;
+}
+
+.done {
+    position: relative;
+    width: 315px;
+    height: 89px;
+    z-index: 10;
+    text-align: center;
+    background: none;
+    background-image: url("../../public/img/doneAlbumEditButton.svg");
+    -webkit-box-shadow: 0 3px 5px #333;
+	-moz-box-shadow: 0 3px 5px #333;
+	box-shadow: 0 3px 5px #333;
+}
+
+.div1 {
+    display: flex;
+    column-gap: 10px;
+}
+.div2 {
+    left: 530px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 100px;
+    column-gap: 1222px;
+}
+
+
+
+/* .endLine {
+    position:absolute;
+    display: flex;
+    width: 88%;
+    height: 1px;
+    left: 99.33px;
+    top: 1100px;
+    flex-shrink: 0;
+
+    border: 1px;
+    background-image: url("../../public/img/startLine.svg");
+    color: white;
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+} */
+
+.test {
+    position: relative;
+    color:white;
+    z-index: 100000;
+    width: 100%;
+}
+
+.tracknum {
+    width: 7%;
+    text-align: left;
+    font-family: 'Montserrat';
+    font-size: 32px;
+    flex: 1;
+}
+
+.trackname {
+    width: 73%;
+    text-align: left;
+    font-family: 'Gothic A1';
+    font-size: 40px;
+
+}
+.trackdelete {
+    width: 0.0%;
+    text-align: left;
+
+}
+
+
+.songlist {
+    bottom: 180px;
+    left: 130px;
+    position: relative;
+    color:white;
+    z-index: 100000;
+    width: 1390px;
+    border-collapse: collapse;
+    margin-bottom: -120px;
+}
