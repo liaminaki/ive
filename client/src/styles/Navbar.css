@@ -1,6 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
 
+.navbar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 5px 3px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
 .navbar-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: 10px auto;
+  
+}
+
+.navbar-items {
+  display: flex; 
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  margin: 0 16px;
+
+  font-family: 'Eagle Lake', cursive;
+  text-decoration: none;
+  color: #000;
+}
+
+.navbar-items.left {
+  min-width: 250px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar-items.right {
+  min-width: 250px;
+}
+
+
+
+/* .navbar-container {
   position: absolute;
   display: flex;
   left: 0;
@@ -65,4 +109,5 @@
   left: 68vw;
   top: 50%;
   transform: translateY(-50%);
-}
+} */
+

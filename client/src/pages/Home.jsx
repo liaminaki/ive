@@ -5,8 +5,17 @@ import '../styles/Home.css';
 const Home = () => {
   return (
     <div className='Homepage'>
-        <div className='spacer'></div>
-        <img src="img/HomePage.png"></img>
+        <img src="img/hero.jpg" className='hero'></img>
+        <div className='home-members-container'>
+          <div className='home-members'>
+            <img src="img/hero.jpg" className='home-member'></img>
+            <img src="img/hero.jpg" className='home-member'></img>
+            <img src="img/hero.jpg" className='home-member'></img>
+            <img src="img/hero.jpg" className='home-member'></img>
+            <img src="img/hero.jpg" className='home-member'></img>
+            <img src="img/hero.jpg" className='home-member'></img>
+          </div>
+        </div>
     </div>
   )
 }

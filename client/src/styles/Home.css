@@ -1,4 +1,32 @@
-.Homepage {
+
+
+.hero {
+  width: 100vw;
+  max-height: 90vh;
+  object-fit: cover;
+  display: block;
+}
+
+.home-members-container {
+  background-color: pink;
+}
+
+.home-members {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.home-member {
+  width: 200px;
+  height: 500px;
+  object-fit: cover;
+}
+
+/* .Homepage {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -8,4 +36,4 @@
   
   .Homepage img {
     max-width: 100%;
-  }
+  } */
