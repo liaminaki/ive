@@ -22,7 +22,6 @@ const Profile = () => {
   
   return (
     <div>
-        <div className='spacer'></div>
         <div className='header'>Profile</div>
         <div className='allMembers'>
             {members.map((member)=>(

@@ -38,7 +38,6 @@ const Member = () => {
   
   return (
     <div>
-        <div className='spacer'></div>
         <div className="a-member">
             <img src={`../../img/member-photo/${member.mPhoto}`} className="member-photo" width="100px" alt="Preview" />
             <div className="member-details">
