@@ -35,14 +35,13 @@ const Discography = () => {
 
   return (
     <div>
-        <div className='spacer'></div>
-        <div className='image-container'>
-        <img class="image-wrapper1"src="img/Discography.png"></img>
-        <Link to={`/discography/Studio%20Album`}><img class="image-wrapper2" src="img/StudioAlbum.png"></img> </Link>
-        <Link to={`/discography/Single%20Album`}><img class="image-wrapper3"src="img/SingleAlbum.png"></img> </Link>
-        <Link to={`/discography/Mini%20Album`}><img class="image-wrapper4"src="img/MiniAlbum.png"></img> </Link>
-        <Link to={`/discography/Digital%20Single`}><img class="image-wrapper5"src="img/DigitalSingle.png"></img> </Link>
-        <Link to={`/discography/all-songs`}><img class="image-wrapper6"src="img/AllSongs.png"></img> </Link>
+        <div className='discography'>
+        <img class="album-type"src="img/Discography.png"></img>
+        <Link to={`/discography/Studio%20Album`}><img class="album-type" src="img/StudioAlbum.png"></img> </Link>
+        <Link to={`/discography/Single%20Album`}><img class="album-type"src="img/SingleAlbum.png"></img> </Link>
+        <Link to={`/discography/Mini%20Album`}><img class="album-type"src="img/MiniAlbum.png"></img> </Link>
+        <Link to={`/discography/Digital%20Single`}><img class="album-type"src="img/DigitalSingle.png"></img> </Link>
+        <Link to={`/discography/all-songs`}><img class="album-type"src="img/AllSongs.png"></img> </Link>
         </div>
            
     </div>

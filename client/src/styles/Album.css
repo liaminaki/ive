@@ -1,0 +1,11 @@
+.albums {
+    display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.anAlbum {
+    width: 300px;
+}

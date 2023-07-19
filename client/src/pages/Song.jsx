@@ -106,99 +106,127 @@ const Song = () => {
     
   
     return (
-        <div>
-            {/* <h1>Songs</h1> */}
-            <div className="song">
-                <div className='spacer'></div>
-                <div class="albumGradientBG"></div>
-                <img class="albumPhoto" src={`http://localhost:8800/img/album-photo/${albPhoto}`} width="100px" alt="Preview" />
-                <p class="albumType">{albType}</p>
-                <p class="albumName">{albTitle}</p>
-                <div class="albumDetails">
-                <p>{albRelYear} • {numberOfSongs} {numberOfSongs === 1 ? 'song' : 'songs'}, {albumLength.hours !== 0 && `${albumLength.hours} hr `}
-                    {albumLength.minutes !== 0 && `${albumLength.minutes} min `}
-                    {albumLength.seconds !== 0 && `${albumLength.seconds} sec `}</p>
-                    {/* <p>{numberOfSongs} {numberOfSongs === 1 ? 'song' : 'songs'}</p>
-                    <p>{albumLength.hours !== 0 && `${albumLength.hours} hr `}
-                    {albumLength.minutes !== 0 && `${albumLength.minutes} min `}
-                    {albumLength.seconds !== 0 && `${albumLength.seconds} sec `}
-                    </p> */}
-            </div>
+        
             
-            <section>
-            <Link to={`/discography/${albType}`} class="backButton"></Link>
-                <div class="blackBG"></div>
-                <div class="startLine"></div>
-
-                <div class="endLine"></div>
+        <div className="song">
+            <section id='backButton' className='content'><Link to={`/discography/${albType}`}><img src="/img/backButton.svg"></img></Link></section>
+            <section className="albumGradientBG">
+                <div className='albumDetails content'>
+                    <img className="albumPhoto" src={`http://localhost:8800/img/album-photo/${albPhoto}`} width="100px" alt="Preview" />
+                    <div className="right">
+                        <div className='editButton' onClick={handleEditClick}><img src="/img/editButton.svg"></img></div>
+                        <div className='lower'>
+                            <p className="albumType">{albType}</p>
+                            <p className="albumName">{albTitle}</p>
+                            <p className="albumMoreDetails">
+                                {albRelYear} • {numberOfSongs} {numberOfSongs === 1 ? 'song' : 'songs'} • {albumLength.hours !== 0 && `${albumLength.hours} hr `}
+                                {albumLength.minutes !== 0 && `${albumLength.minutes} min `}
+                                {albumLength.seconds !== 0 && `${albumLength.seconds} sec `}
+                            </p>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
             </section>
+        
+            { editMode ? (
+                <section className='songlist-section'>
+                <table className="songlist content" id="no-margin">
+                    <thead>
+                        <tr>
+                            <th className='tracknum'>#</th> 
+                            <th className='trackname'>Title</th>
+                            <th className='edit-buttons'></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {song.map((song)=>(
+                            <tr key={song.sID}>
+                                <td className='tracknum'>{song.sOrder} </td> 
+                                <td className='trackname'>{song.sTitle} </td>
+                                <td className='edit-buttons'>
+                                    <Link to={`/discography/${albType}/${albID}/${albTitle}/update/${song.sID}/${song.sTitle}`}><img src="/img/editSongButton.svg" className='update'></img></Link>
+                                    <img src="/img/removeSongButton.svg" onClick={()=>handleDeleteSong(song.sID)} className='delete'></img>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <div className='content'>
+                    <hr className='end-line'></hr>
+                    <Link to={`/discography/${albType}/${albID}/${albTitle}/add`}><img src="/img/addSongButton.svg" className='addButton'></img></Link>
+                </div>
+                <div className='content done'>
+                    <img className='done' onClick={handleDoneEdit} src="/img/doneAlbumEditButton.svg"></img>
+                </div>
+            </section>
+                
 
+                    // <table className="songlist">
+                        
+                    //         <th className='tracknum'>#</th> 
+                    //         <th className='trackname'>Title</th>
+                    //         <th></th>
+                            
+                    //         {song.map((song)=>(
+                    //         <tr key={song.sID}>
+                    //             <td className='tracknum'>{song.sOrder} </td> 
+                    //             <td className='trackname'>{song.sTitle} </td>
+                    //             <div className='b'>
+                    //             <td ><Link to={`/discography/${albType}/${albID}/${albTitle}/update/${song.sID}/${song.sTitle}`}><div className='update'></div></Link></td>
+                    //             <td className='delete' ></td>
+                    //             </div>
+                                
+                    //         </tr>
+                    //         ))}
+                        
+                    // </table>
+                    // <Link to={`/discography/${albType}/${albID}/${albTitle}/add`}><div className="addButton"></div></Link> 
+                    // <button className='done' onClick={handleDoneEdit}></button>
+                
                     
                 
-                { editMode ? (
-                    <div>
-                        <button className='edit'><Link to={`/discography/update/${albID}/${albTitle}`}>Edit Album Data</Link></button>
-                        <div class="blackBG"></div>
-                        <div class="startLine"></div>
-                        <table class="songlist">
+            ) : (
+                
+                <section className='songlist-section'>
+                    <table className="songlist content" id="no-margin">
+                        <thead>
                             <tr>
                                 <th className='tracknum'>#</th> 
                                 <th className='trackname'>Title</th>
-                                <th></th>
-                                <th></th>
-                                
+                                <th className='tracklength logo'><img src="/img/timeCategory.svg"></img></th>
                             </tr>
-                                {song.map((song)=>(
+                        </thead>
+                        <tbody>
+                            {song.map((song)=>(
                                 <tr key={song.sID}>
                                     <td className='tracknum'>{song.sOrder} </td> 
                                     <td className='trackname'>{song.sTitle} </td>
-                                    <div className='b'>
-                                    <td ><Link to={`/discography/${albType}/${albID}/${albTitle}/update/${song.sID}/${song.sTitle}`}><div className='update'></div></Link></td>
-                                    <td className='delete' onClick={()=>handleDeleteSong(song.sID)}></td>
-                                    </div>
-                                    
-                                </tr>
-                                ))}
-                          
-                        </table>
-                        <Link to={`/discography/${albType}/${albID}/${albTitle}/add`}><div className="addButton"></div></Link> 
-                        <button className='done' onClick={handleDoneEdit}></button>
-                    
-                       
-                    </div>
-                ) : (
-                    <div>
-                    <button className='editButton' onClick={handleEditClick}></button>
-
-                    <table class="songlist">
-                            <tr>
-                                <th className='tracknum'>#</th> 
-                                <th className='trackname'>Title</th>
-                                <th className='timeCategory'></th>
-                                
-                            </tr>
-                                {song.map((song)=>(
-                                <tr key={song.sID}>
-                                    <td className='tracknum'>{song.sOrder} </td> 
-                                    <td className='trackname'>{song.sTitle} </td>
-                                    <td >
-                                    <span className='tracklenght'>{song.sLengthInHours ? `${song.sLengthInMinutes}:` : ""}</span> 
-                                    <span className='tracklenght'>{(song.sLengthInHours && song.sLengthInMinutes) ? `${song.sLengthInMinutes.toString().padStart(2, '0')}:` 
-                                    : song.sLengthInMinutes ? `${song.sLengthInMinutes}:`
-                                    : (!song.sLengthInHours && !song.sLengthInMinutes && song.sLengthInSeconds) ? "0:" 
-                                    : !song.sLengthInSeconds ? ""
-                                    : "00:"}
-                                </span>
-                            <span className='tracklenght'>{(song.sLengthInHours || song.sLengthInMinutes || song.sLengthInSeconds) ? song.sLengthInSeconds.toString().padStart(2, '0') : "N/A"}</span>                
+                                    <td className='tracklength'>
+                                        <span>{song.sLengthInHours ? `${song.sLengthInMinutes}:` : ""}</span> 
+                                        <span>{(song.sLengthInHours && song.sLengthInMinutes) ? `${song.sLengthInMinutes.toString().padStart(2, '0')}:` 
+                                            : song.sLengthInMinutes ? `${song.sLengthInMinutes}:`
+                                            : (!song.sLengthInHours && !song.sLengthInMinutes && song.sLengthInSeconds) ? "0:" 
+                                            : !song.sLengthInSeconds ? ""
+                                            : "00:"}
+                                        </span>
+                                        <span>{(song.sLengthInHours || song.sLengthInMinutes || song.sLengthInSeconds) ? song.sLengthInSeconds.toString().padStart(2, '0') : "N/A"}</span>                
                                     </td>
                                 </tr>
-                                ))}
-                          
-                        </table>
+                            ))}
+                        </tbody>
+                    </table>
+                    <div className='content'>
+                        <hr className='end-line'></hr>
                     </div>
-                )}
+                </section>
                 
-            </div>
+                
+                
+            )}
+            <div className='black-space'></div>
+            
         </div>
 
         

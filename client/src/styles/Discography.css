@@ -1,4 +1,9 @@
-.image-container {
+.album-type {
+  width: 100vw;
+  display: block;
+}
+
+/* .image-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,11 +22,11 @@
   
   .image-container img {
 
-    margin: 0 0 0 0; /* Adjust the value to set the desired vertical gap */
+    margin: 0 0 0 0; /* Adjust the value to set the desired vertical gap 
     margin: 0;
     padding: 0;
     display: block;
-  } 
+  }  */
    
 
     /* .image-wrapper1{
